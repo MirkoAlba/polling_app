@@ -1,3 +1,7 @@
 export default function Home() {
-  return <h1>index</h1>;
+  return (
+    <div className="bg-primary">
+      <h1>index</h1>
+    </div>
+  );
 }
