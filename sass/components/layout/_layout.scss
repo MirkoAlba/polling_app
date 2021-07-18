@@ -89,9 +89,12 @@
 }
 
 //Footer
-.footer {
-  ul {
-    list-style: none;
+.wrapper-footer {
+  background-color: $primary;
+  .footer {
+    ul {
+      list-style: none;
+    }
   }
 }
 
