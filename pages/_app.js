@@ -1,11 +1,15 @@
 import "../sass/index.scss"; //scss style
 import Layout from "../components/layout/layout";
 
+import { AuthProvider } from "../apollo/apollo-client";
+
 function MyApp({ Component, pageProps }) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <AuthProvider>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </AuthProvider>
   );
 }
 
