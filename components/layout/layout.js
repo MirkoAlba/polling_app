@@ -4,7 +4,6 @@ import Footer from "./footer";
 import { Container } from "react-bootstrap";
 
 export default function Layout(props) {
-  // console.log(props.client);
   return (
     <Fragment>
       <Header />

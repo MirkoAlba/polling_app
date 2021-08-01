@@ -1,4 +1,4 @@
-export default function Home() {
+export default function Home(props) {
   return (
     <div>
       <h1>ciao</h1>
