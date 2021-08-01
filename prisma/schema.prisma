@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+//npx prisma migrate dev crea nuove migrations
+//npx prisma studio apre la visualizzazione delle tabelle nel browser
+
+model User {
+  id         String   @id @default(cuid())
+  firstName  String
+  lastName   String
+  cellNumber Int
+  profile    Profile?
+}
+
+model Profile {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  isAdmin   Boolean
+  user      User     @relation(fields: [id], references: [id])
+  userId    String
+}

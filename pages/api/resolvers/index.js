@@ -1,7 +1,10 @@
-import { messageResolver } from "./message-resolver";
+import { userResolver } from "./user-resolver";
 
 export const resolvers = {
   Query: {
-    ...messageResolver.Query,
+    ...userResolver.Query,
+  },
+  Mutation: {
+    ...userResolver.Mutation,
   },
 };

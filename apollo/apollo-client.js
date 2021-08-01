@@ -8,10 +8,10 @@ import {
   ApolloProvider,
 } from "@apollo/client";
 
-// import { setContext } from "@apollo/client/link/context";
+import { setContext } from "@apollo/client/link/context";
 import { onError } from "@apollo/client/link/error";
 
-// import { getAccessToken } from "./accessToken";
+import { getAccessToken } from "./accessToken";
 
 const dynamicUri =
   process.env.NODE_ENV === "development"
@@ -36,17 +36,17 @@ export function getStandaloneApolloClient() {
     if (networkError) console.log(`[Network error]: ${networkError}`);
   });
 
-  // const authLink = setContext((_, { headers }) => {
-  //   // prendo il token
-  //   const token = getAccessToken();
+  const authLink = setContext((_, { headers }) => {
+    // prendo il token
+    const token = getAccessToken();
 
-  //   return {
-  //     headers: {
-  //       ...headers,
-  //       authorization: token ? `Bearer ${token}` : "", //lo passo negli headers della req
-  //     },
-  //   };
-  // });
+    return {
+      headers: {
+        ...headers,
+        authorization: token ? `Bearer ${token}` : "", //lo passo negli headers della req
+      },
+    };
+  });
 
   const httpLink = new HttpLink({
     uri: dynamicUri,
@@ -57,8 +57,8 @@ export function getStandaloneApolloClient() {
   });
 
   return new ApolloClient({
-    // link: ApolloLink.from([errorLink, authLink.concat(httpLink)]),
-    link: ApolloLink.from([errorLink.concat(httpLink)]),
+    link: ApolloLink.from([errorLink, authLink.concat(httpLink)]),
+    // link: ApolloLink.from([errorLink.concat(httpLink)]),
     cache: new InMemoryCache(),
   });
 }

@@ -1,13 +1,13 @@
 import { ApolloServer } from "apollo-server-micro";
 import { typeDefs } from "./schemas/index";
 import { resolvers } from "./resolvers/index";
-// import { createContext } from "./db/context";
+import { createContext } from "./db/context";
 
 // passo il prisma client attraverso il context del server
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
-  //   context: ({ res, req }) => createContext(res, req),
+  context: ({ res, req }) => createContext(res, req),
   uploads: false,
   introspection: true,
   // serve per ritornare dal resolver l'errore
