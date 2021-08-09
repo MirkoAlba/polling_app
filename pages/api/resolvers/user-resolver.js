@@ -84,11 +84,9 @@ export const userResolver = {
           user: { connect: { id: user.id } }, // serve nelle 1 a 1 per collegare le relazioni
         };
 
-        const profile = await context.prisma.profile.create({
+        await context.prisma.profile.create({
           data: newProfile,
         });
-
-        console.log(profile);
       } catch (err) {
         console.log(err);
         return "Register not Successfull";
