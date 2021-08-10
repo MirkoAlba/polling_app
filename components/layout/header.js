@@ -59,17 +59,13 @@ export default function Header() {
           </Navbar.Toggle>
 
           <Navbar.Collapse className={open ? "open" : "closed"}>
-            <Link href="/">
-              <a className="nav-link">Link 1</a>
+            <Link href="/register">
+              <a className="nav-link">Accedi/Registrati</a>
             </Link>
 
-            <Link href="/">
-              <a className="nav-link">Link 2</a>
-            </Link>
-
-            <Link href="/">
-              <a className="nav-link">Link 3</a>
-            </Link>
+            {/* <Link href="/register">
+              <a className="nav-link">Registrati</a>
+            </Link> */}
           </Navbar.Collapse>
         </Navbar>
       </Container>

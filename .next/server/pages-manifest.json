@@ -3,5 +3,6 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
+  "/register": "pages/register.js",
   "/api/graphql": "pages/api/graphql.js"
 }

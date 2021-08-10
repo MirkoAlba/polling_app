@@ -4,8 +4,10 @@ export default function Footer() {
     <div className="wrapper-footer">
       <Container className="footer pt-4 pb-2">
         <Row>
-          <Col md={3}>Logo</Col>
-          <Col md={3} className="mt-3 mt-md-0">
+          <Col sm={12} md={3}>
+            Logo
+          </Col>
+          <Col xs={4} md={3} className="mt-3 mt-md-0">
             <ul>
               <strong>ciao</strong>
               <li className="mt-2">ciao</li>
@@ -13,7 +15,7 @@ export default function Footer() {
               <li>ciao</li>
             </ul>
           </Col>
-          <Col md={3}>
+          <Col xs={4} md={3} className="mt-3 mt-md-0">
             <ul>
               <strong>ciao</strong>
               <li className="mt-2">ciao</li>
@@ -21,7 +23,7 @@ export default function Footer() {
               <li>ciao</li>
             </ul>
           </Col>
-          <Col md={3}>
+          <Col xs={4} md={3} className="mt-3 mt-md-0">
             <ul>
               <strong>ciao</strong>
               <li className="mt-2">ciao</li>

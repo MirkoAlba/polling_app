@@ -1,10 +1,12 @@
 const regExEmail =
   /^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$/;
 const regExPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+var regExPhoneNumber =
+  /^(\((00|\+)39\)|(00|\+)39)?(38[890]|34[7-90]|36[680]|33[3-90]|32[89])\d{7}$/;
 
 export function validateRegisterInput(
-  firstname,
-  lastname,
+  firstName,
+  lastName,
   cellNumber,
   email,
   password,
@@ -12,24 +14,29 @@ export function validateRegisterInput(
 ) {
   const errors = {};
 
-  if (firstname.trim() === "") {
-    errors.userFirstName = "Nome non deve essere vuoto!";
+  if (firstName.trim() === "") {
+    errors.firstName = "Nome non deve essere vuoto!";
   }
 
-  if (firstname.trim().length > 20) {
+  if (firstName.trim().length > 20) {
     errors.username = "Nome non deve superare i 20 caratteri!";
   }
 
-  if (lastname.trim() === "") {
-    errors.lastname = "Cognome non deve essere vuoto!";
+  if (lastName.trim() === "") {
+    errors.lastName = "Cognome non deve essere vuoto!";
   }
 
-  if (lastname.trim().length > 35) {
+  if (lastName.trim().length > 35) {
     errors.username = "Cognome non deve superare i 35 caratteri!";
   }
 
   if (!cellNumber) {
     errors.cellNumber = "Numero di telefono non deve essere vuoto!";
+  } else {
+    var s = cellNumber.toString();
+    if (!s.match(regExPhoneNumber)) {
+      errors.cellNumber = "Numero di telefono non valido";
+    }
   }
 
   if (email.trim() === "") {
@@ -59,22 +66,22 @@ export function validateRegisterInput(
   };
 }
 
-export function validateLoginInput(email, password) {
+export function validateLoginInput(userEmail, userPassword) {
   const errors = {};
 
-  if (password.trim() === "") {
-    errors.password = "Password non deve essere vuota!";
+  if (userPassword.trim() === "") {
+    errors.userPassword = "Password non deve essere vuota!";
   }
 
-  if (email.trim() === "") {
-    errors.email = "Email non deve essere vuota!";
+  if (userEmail.trim() === "") {
+    errors.userEmail = "Email non deve essere vuota!";
   } else {
-    if (email.trim().length > 50) {
-      errors.email = "Email non deve superare i 50 caratteri!";
+    if (userEmail.trim().length > 50) {
+      errors.userEmail = "Email non deve superare i 50 caratteri!";
     }
 
-    if (!email.match(regExEmail)) {
-      errors.email = "Email deve essere valida!";
+    if (!userEmail.match(regExEmail)) {
+      errors.userEmail = "Email deve essere valida!";
     }
   }
 

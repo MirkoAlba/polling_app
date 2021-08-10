@@ -60,6 +60,7 @@ export function getStandaloneApolloClient() {
     link: ApolloLink.from([errorLink, authLink.concat(httpLink)]),
     // link: ApolloLink.from([errorLink.concat(httpLink)]),
     cache: new InMemoryCache(),
+    credentials: "include",
   });
 }
 
