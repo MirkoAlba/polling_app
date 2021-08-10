@@ -7,8 +7,7 @@ export const typeDefs = gql`
     id: ID!
     firstName: String!
     lastname: String!
-    cellNumber: Int!
-
+    cellNumber: Int! #float
     # relation Profile
     profile: Profile!
     profileId: ID!

@@ -1,8 +1,7 @@
 const regExEmail =
   /^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$/;
 const regExPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-var regExPhoneNumber =
-  /^(\((00|\+)39\)|(00|\+)39)?(38[890]|34[7-90]|36[680]|33[3-90]|32[89])\d{7}$/;
+var regExPhoneNumber = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
 
 export function validateRegisterInput(
   firstName,
@@ -32,12 +31,7 @@ export function validateRegisterInput(
 
   if (!cellNumber) {
     errors.cellNumber = "Numero di telefono non deve essere vuoto!";
-  } else {
-    var s = cellNumber.toString();
-    if (!s.match(regExPhoneNumber)) {
-      errors.cellNumber = "Numero di telefono non valido";
-    }
-  }
+  } //validate number
 
   if (email.trim() === "") {
     errors.email = "Email non deve essere vuota!";

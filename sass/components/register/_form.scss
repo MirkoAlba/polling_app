@@ -12,10 +12,8 @@
   }
 
   .col-right {
-    @include media-breakpoint-down(sm) {
-      padding-top: 3rem;
-      padding-bottom: 3rem;
-    }
+    margin-top: 3rem;
+    margin-bottom: 3rem;
   }
 
   .wrapper {
@@ -25,6 +23,7 @@
     &__right {
       min-height: 50%;
       padding: 2rem;
+      border-radius: 30px;
       background: linear-gradient(225deg, #e68c66, #ffa679);
       box-shadow: -20px 20px 0px #bf7455, 20px -20px 0px #ffc28d;
     }

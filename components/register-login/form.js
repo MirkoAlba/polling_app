@@ -28,8 +28,6 @@ export default function RegisterLoginForm({ isLoggedIn }) {
     confirmPassword: "",
   });
 
-  console.log(registerInput.cellNumber);
-
   const [login] = useMutation(LOGIN_MUTATION, {
     variables: { userEmail, userPassword },
     onCompleted: (data) => {
@@ -74,7 +72,7 @@ export default function RegisterLoginForm({ isLoggedIn }) {
         <Fragment>
           <Col
             xs={12}
-            lg={6}
+            lg={5}
             className="d-none d-lg-flex align-items-center m-lg-0 p-lg-0"
           >
             <div className="wrapper w-100 d-flex align-items-center">
@@ -83,31 +81,55 @@ export default function RegisterLoginForm({ isLoggedIn }) {
           </Col>
           <Col
             xs={12}
-            lg={6}
+            lg={7}
             className="d-flex align-items-center m-lg-0 p-lg-0 col-right"
           >
             <div className="wrapper wrapper__right w-100 d-flex align-items-center">
               <Form onSubmit={(e) => handleSubmitRegister(e)} className="w-100">
-                <div>
-                  <Form.Label className="form-label">Nome</Form.Label>
-                  <Form.Control
-                    className="form-input"
-                    type="text"
-                    placeholder="Inserisci il tuo Nome"
-                    onChange={(e) =>
-                      setRegisterInput({
-                        ...registerInput,
-                        firstName: e.target.value,
-                      })
-                    }
-                    isInvalid={errors.firstName ? true : false}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {errors.firstName}
-                  </Form.Control.Feedback>
+                <div
+                  style={{ gap: "30px" }}
+                  className="d-flex justify-content-between"
+                >
+                  <div className="w-100">
+                    <Form.Label className="form-label">Nome</Form.Label>
+                    <Form.Control
+                      className="form-input"
+                      type="text"
+                      placeholder="Inserisci il tuo Nome"
+                      onChange={(e) =>
+                        setRegisterInput({
+                          ...registerInput,
+                          firstName: e.target.value,
+                        })
+                      }
+                      isInvalid={errors.firstName ? true : false}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.firstName}
+                    </Form.Control.Feedback>
+                  </div>
+
+                  <div className="d-none d-lg-block w-100">
+                    <Form.Label className="form-label">Cognome</Form.Label>
+                    <Form.Control
+                      className="form-input"
+                      type="text"
+                      placeholder="Inserisci il tuo Cognome"
+                      onChange={(e) =>
+                        setRegisterInput({
+                          ...registerInput,
+                          lastName: e.target.value,
+                        })
+                      }
+                      isInvalid={errors.lastName ? true : false}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.lastName}
+                    </Form.Control.Feedback>
+                  </div>
                 </div>
 
-                <div className="mt-4">
+                <div className="d-block d-lg-none mt-4">
                   <Form.Label className="form-label">Cognome</Form.Label>
                   <Form.Control
                     className="form-input"
@@ -126,13 +148,58 @@ export default function RegisterLoginForm({ isLoggedIn }) {
                   </Form.Control.Feedback>
                 </div>
 
-                <div className="mt-4">
+                <div
+                  style={{ gap: "30px" }}
+                  className="mt-4 d-flex justify-content-center"
+                >
+                  <div className="w-100">
+                    <Form.Label className="form-label">Email</Form.Label>
+                    <Form.Control
+                      className="form-input"
+                      type="email"
+                      placeholder="Inserisci la tua E-mail"
+                      onChange={(e) =>
+                        setRegisterInput({
+                          ...registerInput,
+                          email: e.target.value,
+                        })
+                      }
+                      isInvalid={errors.email ? true : false}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.email}
+                    </Form.Control.Feedback>
+                  </div>
+
+                  <div className="w-100 d-none d-lg-block">
+                    <Form.Label className="form-label">
+                      Numero di telefono
+                    </Form.Label>
+                    <Form.Control
+                      className="form-input"
+                      type="text"
+                      placeholder="Inserisci il tuo Numero di telefono"
+                      onChange={(e) =>
+                        setRegisterInput({
+                          ...registerInput,
+                          cellNumber: parseInt(e.target.value),
+                        })
+                      }
+                      isInvalid={errors.cellNumber ? true : false}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.cellNumber}
+                    </Form.Control.Feedback>
+                  </div>
+                </div>
+
+                <div className="mt-4 d-block d-lg-none">
                   <Form.Label className="form-label">
                     Numero di telefono
                   </Form.Label>
                   <Form.Control
                     className="form-input"
-                    type="number"
+                    type="text"
                     placeholder="Inserisci il tuo Numero di telefono"
                     onChange={(e) =>
                       setRegisterInput({
@@ -147,45 +214,52 @@ export default function RegisterLoginForm({ isLoggedIn }) {
                   </Form.Control.Feedback>
                 </div>
 
-                <div className="mt-4">
-                  <Form.Label className="form-label">Email</Form.Label>
-                  <Form.Control
-                    className="form-input"
-                    type="email"
-                    placeholder="Inserisci la tua E-mail"
-                    onChange={(e) =>
-                      setRegisterInput({
-                        ...registerInput,
-                        email: e.target.value,
-                      })
-                    }
-                    isInvalid={errors.email ? true : false}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {errors.email}
-                  </Form.Control.Feedback>
+                <div
+                  style={{ gap: "30px" }}
+                  className="my-4 d-flex justify-content-center"
+                >
+                  <div className="w-100">
+                    <Form.Label className="form-label">Password</Form.Label>
+                    <Form.Control
+                      className="form-input"
+                      type="password"
+                      placeholder="Inserisci la Password"
+                      onChange={(e) =>
+                        setRegisterInput({
+                          ...registerInput,
+                          password: e.target.value,
+                        })
+                      }
+                      isInvalid={errors.password ? true : false}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.password}
+                    </Form.Control.Feedback>
+                  </div>
+
+                  <div className="d-none d-lg-block w-100">
+                    <Form.Label className="form-label">
+                      Conferma Password
+                    </Form.Label>
+                    <Form.Control
+                      className="form-input"
+                      type="password"
+                      placeholder="Inserisci di nuovo la Password"
+                      onChange={(e) =>
+                        setRegisterInput({
+                          ...registerInput,
+                          confirmPassword: e.target.value,
+                        })
+                      }
+                      isInvalid={errors.confirmPassword ? true : false}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.confirmPassword}
+                    </Form.Control.Feedback>
+                  </div>
                 </div>
 
-                <div className="mt-4">
-                  <Form.Label className="form-label">Password</Form.Label>
-                  <Form.Control
-                    className="form-input"
-                    type="password"
-                    placeholder="Inserisci la Password"
-                    onChange={(e) =>
-                      setRegisterInput({
-                        ...registerInput,
-                        password: e.target.value,
-                      })
-                    }
-                    isInvalid={errors.password ? true : false}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {errors.password}
-                  </Form.Control.Feedback>
-                </div>
-
-                <div className="my-4">
+                <div className="d-block d-lg-none my-4">
                   <Form.Label className="form-label">
                     Conferma Password
                   </Form.Label>
@@ -206,6 +280,16 @@ export default function RegisterLoginForm({ isLoggedIn }) {
                   </Form.Control.Feedback>
                 </div>
 
+                <div className="d-flex ">
+                  <Form.Check required aria-label="option 1" />
+                  <p>
+                    Accetto le condizioni della{" "}
+                    <a style={{ color: "black" }} href="#">
+                      Privacy.
+                    </a>
+                  </p>
+                </div>
+
                 <Button className="btn__inverted" type="submit">
                   Registrati
                 </Button>
@@ -221,8 +305,8 @@ export default function RegisterLoginForm({ isLoggedIn }) {
         <Fragment>
           <Col
             xs={12}
-            lg={6}
-            className="d-none d-lg-flex align-items-center m-lg-0 p-lg-0"
+            lg={5}
+            className="d-none d-lg-flex align-items-center m-lg-0 p-lg-0 col-right"
           >
             <div className="wrapper__left w-100 d-flex align-items-center">
               <div>Logo</div>
@@ -230,7 +314,7 @@ export default function RegisterLoginForm({ isLoggedIn }) {
           </Col>
           <Col
             xs={12}
-            lg={6}
+            lg={7}
             className="d-flex align-items-center m-lg-0 p-lg-0 col-right"
           >
             <div className="wrapper__right w-100 d-flex align-items-center">
