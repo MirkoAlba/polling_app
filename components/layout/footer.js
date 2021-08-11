@@ -4,32 +4,31 @@ export default function Footer() {
     <div className="wrapper-footer">
       <Container className="footer pt-4 pb-2">
         <Row>
-          <Col sm={12} md={3}>
+          <Col xs={12} md={6}>
             Logo
+            <p>
+              <strong>
+                Via tali dei tali, 27 bergamo
+                <br />
+                P.IVA: 12345678910
+                <br />
+                Telefono: 035 9878656
+              </strong>
+            </p>
           </Col>
-          <Col xs={12} md={3} className="mt-3 mt-md-0">
-            <ul>
-              <strong>ciao</strong>
-              <li className="mt-2">ciao</li>
-              <li>ciao</li>
-              <li>ciao</li>
-            </ul>
-          </Col>
-          <Col xs={12} md={3} className="mt-3 mt-md-0">
-            <ul>
-              <strong>ciao</strong>
-              <li className="mt-2">ciao</li>
-              <li>ciao</li>
-              <li>ciao</li>
-            </ul>
-          </Col>
-          <Col xs={12} md={3} className="mt-3 mt-md-0">
-            <ul>
-              <strong>ciao</strong>
-              <li className="mt-2">ciao</li>
-              <li>ciao</li>
-              <li>ciao</li>
-            </ul>
+
+          <Col xs={12} md={6} className="d-flex col-social">
+            <a href="#">
+              <img width="60" height="60" src="/facebook.svg" alt="Facebook" />
+            </a>
+            <a href="#">
+              <img
+                width="60"
+                height="60"
+                src="/instagram.svg"
+                alt="Instagram"
+              />
+            </a>
           </Col>
         </Row>
       </Container>

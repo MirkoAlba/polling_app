@@ -40,6 +40,8 @@ export function getStandaloneApolloClient() {
     // prendo il token
     const token = getAccessToken();
 
+    // console.log("client:", token);
+
     return {
       headers: {
         ...headers,

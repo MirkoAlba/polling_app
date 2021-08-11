@@ -6,7 +6,7 @@ import { Container } from "react-bootstrap";
 export default function Layout(props) {
   return (
     <Fragment>
-      <Header />
+      <Header isLoggedIn={props.isLoggedIn} />
       <Container>
         <main className="content">{props.children}</main>
       </Container>

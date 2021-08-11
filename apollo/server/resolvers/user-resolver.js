@@ -14,8 +14,6 @@ export const userResolver = {
         where: { id: context.userId },
       });
 
-      console.log("ciao", context);
-
       return me ? true : false;
     },
   },

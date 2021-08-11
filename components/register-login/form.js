@@ -38,7 +38,7 @@ export default function RegisterLoginForm({ isLoggedIn }) {
     },
     onError: (err) => {
       if (err) {
-        // custom errors defined in validaotrs.js, returned from server
+        // custom errors defined in validators.js, returned from server
         setErrors(err.graphQLErrors[0]?.extensions.exception.errors);
       }
     },
@@ -46,7 +46,7 @@ export default function RegisterLoginForm({ isLoggedIn }) {
 
   const [register] = useMutation(REGISTER_MUTATION, {
     variables: { registerInput },
-    onCompleted: (data) => console.log(data.Register),
+    // onCompleted: (data) => console.log(data.Register),
     onError: (err) => {
       setErrors(err.graphQLErrors[0]?.extensions.exception.errors);
     },

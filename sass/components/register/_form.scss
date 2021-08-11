@@ -1,5 +1,5 @@
 .row-form {
-  min-height: calc(100vh - 120px);
+  min-height: calc(100vh - 120px - 150px);
 
   @include media-breakpoint-down(sm) {
     min-height: calc(100vh - 100px);
@@ -24,8 +24,8 @@
       min-height: 50%;
       padding: 2rem;
       border-radius: 30px;
-      background: linear-gradient(225deg, #e68c66, #ffa679);
-      box-shadow: -20px 20px 0px #bf7455, 20px -20px 0px #ffc28d;
+      background: $orange;
+      box-shadow: -20px 20px 0px #d98d00, 20px -20px 0px #ffbf00;
     }
   }
 }
@@ -37,20 +37,17 @@
 .form-input {
   border-radius: 0;
   border: none;
-  background: transparent !important;
   background-color: transparent !important;
   border-bottom: 1px solid $black;
   color: $white !important;
 
   &:focus,
   &:active {
-    background: transparent !important;
     background-color: transparent !important;
   }
 
   &::placeholder {
     color: $white;
-    background-color: transparent !important;
   }
 }
 

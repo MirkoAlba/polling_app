@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Navbar, Container } from "react-bootstrap";
 import Link from "next/link";
 
-export default function Header() {
+export default function Header({ isLoggedIn }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(!open);
 
@@ -33,39 +33,57 @@ export default function Header() {
             </Link>
           </Navbar.Brand>
 
-          <Navbar.Toggle
-            className="p-0"
-            onClick={handleOpen}
-            aria-controls="basic-navbar-nav"
-          >
-            <svg
-              className={`ham ham6 ${open ? "active" : ""}`}
-              viewBox="0 0 100 100"
-              width="80"
+          <div className="wrapper-icons">
+            {isLoggedIn && (
+              <Link href="/carrello">
+                <a href="#">
+                  <img height="40" width="40" src="/pizza.svg" alt="Carrello" />
+                </a>
+              </Link>
+            )}
+
+            <Navbar.Toggle
+              className="p-0"
+              onClick={handleOpen}
+              aria-controls="basic-navbar-nav"
             >
-              <path
-                className="line top"
-                d="m 30,33 h 40 c 13.100415,0 14.380204,31.80258 6.899646,33.421777 -24.612039,5.327373 9.016154,-52.337577 -12.75751,-30.563913 l -28.284272,28.284272"
-              />
-              <path
-                className="line middle"
-                d="m 70,50 c 0,0 -32.213436,0 -40,0 -7.786564,0 -6.428571,-4.640244 -6.428571,-8.571429 0,-5.895471 6.073743,-11.783399 12.286435,-5.570707 6.212692,6.212692 28.284272,28.284272 28.284272,28.284272"
-              />
-              <path
-                className="line bottom"
-                d="m 69.575405,67.073826 h -40 c -13.100415,0 -14.380204,-31.80258 -6.899646,-33.421777 24.612039,-5.327373 -9.016154,52.337577 12.75751,30.563913 l 28.284272,-28.284272"
-              />
-            </svg>
-          </Navbar.Toggle>
+              <svg
+                className={`ham ham6 ${open ? "active" : ""}`}
+                viewBox="0 0 100 100"
+                width="80"
+              >
+                <path
+                  className="line top"
+                  d="m 30,33 h 40 c 13.100415,0 14.380204,31.80258 6.899646,33.421777 -24.612039,5.327373 9.016154,-52.337577 -12.75751,-30.563913 l -28.284272,28.284272"
+                />
+                <path
+                  className="line middle"
+                  d="m 70,50 c 0,0 -32.213436,0 -40,0 -7.786564,0 -6.428571,-4.640244 -6.428571,-8.571429 0,-5.895471 6.073743,-11.783399 12.286435,-5.570707 6.212692,6.212692 28.284272,28.284272 28.284272,28.284272"
+                />
+                <path
+                  className="line bottom"
+                  d="m 69.575405,67.073826 h -40 c -13.100415,0 -14.380204,-31.80258 -6.899646,-33.421777 24.612039,-5.327373 -9.016154,52.337577 12.75751,30.563913 l 28.284272,-28.284272"
+                />
+              </svg>
+            </Navbar.Toggle>
+          </div>
 
           <Navbar.Collapse className={open ? "open" : "closed"}>
-            <Link href="/register">
-              <a className="nav-link">Accedi/Registrati</a>
-            </Link>
+            {!isLoggedIn && (
+              <Link href="/register">
+                <a onClick={handleOpen} className="nav-link">
+                  Accedi/Registrati
+                </a>
+              </Link>
+            )}
 
-            {/* <Link href="/register">
-              <a className="nav-link">Registrati</a>
-            </Link> */}
+            {isLoggedIn && (
+              <Link href="/register">
+                <a className="nav-link">
+                  <img height="40" width="40" src="/user.svg" alt="Profilo" />
+                </a>
+              </Link>
+            )}
           </Navbar.Collapse>
         </Navbar>
       </Container>

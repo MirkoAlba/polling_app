@@ -20,7 +20,7 @@ export function createContext(res, req) {
   const prisma = createPrismaClient();
   var verified;
   if (req.headers && req.headers.authorization) {
-    // in req.headers c'è il token
+    // in req.headers c'è il token passato in apollo-client
     var token = req.headers.authorization.split(" ")[1];
     try {
       verified = jwt.verify(token, process.env.TOKEN_SECRET_KEY);
@@ -31,5 +31,5 @@ export function createContext(res, req) {
 
   console.log("sono in createContext: Not auth header");
 
-  return { res, req, prisma, userId: verified?.userId };
+  return { res, req, prisma, userId: verified?.profileId };
 }
