@@ -1,7 +1,8 @@
 import { Fragment, useState } from "react";
 
-import { useMutation, gql } from "@apollo/client";
-// import { setAccessToken } from "../../src/client/accessToken";
+import { useMutation } from "@apollo/client";
+import { REGISTER_MUTATION, LOGIN_MUTATION } from "../../graphql/mutations";
+import { setAccessToken } from "../../apollo/client/accessToken";
 import { useRouter } from "next/router";
 import Image from "next/image";
 
@@ -362,15 +363,3 @@ export default function RegisterLoginForm({ isLoggedIn }) {
     </Row>
   );
 }
-
-const REGISTER_MUTATION = gql`
-  mutation register($registerInput: RegisterInput!) {
-    Register(registerInput: $registerInput)
-  }
-`;
-
-const LOGIN_MUTATION = gql`
-  mutation login($userEmail: String!, $userPassword: String!) {
-    Login(email: $userEmail, password: $userPassword)
-  }
-`;

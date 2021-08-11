@@ -1,7 +1,7 @@
 import { ApolloServer } from "apollo-server-micro";
-import { typeDefs } from "./schemas/index";
-import { resolvers } from "./resolvers/index";
-import { createContext } from "./db/context";
+import { typeDefs } from "../../apollo/server/schemas/index";
+import { resolvers } from "../../apollo/server/resolvers/index";
+import { createContext } from "../../apollo/server/db/context";
 
 // passo il prisma client attraverso il context del server
 const apolloServer = new ApolloServer({

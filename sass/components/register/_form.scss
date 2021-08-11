@@ -37,17 +37,20 @@
 .form-input {
   border-radius: 0;
   border: none;
-  background: transparent;
+  background: transparent !important;
+  background-color: transparent !important;
   border-bottom: 1px solid $black;
   color: $white !important;
 
   &:focus,
   &:active {
-    background: transparent;
+    background: transparent !important;
+    background-color: transparent !important;
   }
 
   &::placeholder {
     color: $white;
+    background-color: transparent !important;
   }
 }
 
