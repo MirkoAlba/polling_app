@@ -67,6 +67,14 @@ export default function RegisterLoginForm({ isLoggedIn }) {
     setErrors({});
   };
 
+  function removeSpace(e) {
+    var s = e.target.value.replace(/ /g, "");
+    setRegisterInput({
+      ...registerInput,
+      cellNumber: parseInt(s),
+    });
+  }
+
   return (
     <Row className="row-form">
       {showForm ? (
@@ -180,12 +188,12 @@ export default function RegisterLoginForm({ isLoggedIn }) {
                       className="form-input"
                       type="text"
                       placeholder="Inserisci il tuo Numero di telefono"
-                      onChange={(e) =>
+                      onChange={(e) => {
                         setRegisterInput({
                           ...registerInput,
-                          cellNumber: parseInt(e.target.value),
-                        })
-                      }
+                          cellNumber: e.target.value,
+                        });
+                      }}
                       isInvalid={errors.cellNumber ? true : false}
                     />
                     <Form.Control.Feedback type="invalid">
@@ -202,12 +210,7 @@ export default function RegisterLoginForm({ isLoggedIn }) {
                     className="form-input"
                     type="text"
                     placeholder="Inserisci il tuo Numero di telefono"
-                    onChange={(e) =>
-                      setRegisterInput({
-                        ...registerInput,
-                        cellNumber: parseInt(e.target.value),
-                      })
-                    }
+                    onChange={(e) => removeSpace(e)}
                     isInvalid={errors.cellNumber ? true : false}
                   />
                   <Form.Control.Feedback type="invalid">

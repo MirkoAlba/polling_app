@@ -54,7 +54,3 @@ export const typeDefs = gql`
     Logout: Boolean!
   }
 `;
-
-// mutation Register($registerInput: RegisterInput!) {
-//   Register(registerInput: $registerInput)
-// }

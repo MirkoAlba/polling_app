@@ -7,7 +7,7 @@ export default function Footer() {
           <Col sm={12} md={3}>
             Logo
           </Col>
-          <Col xs={4} md={3} className="mt-3 mt-md-0">
+          <Col xs={12} md={3} className="mt-3 mt-md-0">
             <ul>
               <strong>ciao</strong>
               <li className="mt-2">ciao</li>
@@ -15,7 +15,7 @@ export default function Footer() {
               <li>ciao</li>
             </ul>
           </Col>
-          <Col xs={4} md={3} className="mt-3 mt-md-0">
+          <Col xs={12} md={3} className="mt-3 mt-md-0">
             <ul>
               <strong>ciao</strong>
               <li className="mt-2">ciao</li>
@@ -23,7 +23,7 @@ export default function Footer() {
               <li>ciao</li>
             </ul>
           </Col>
-          <Col xs={4} md={3} className="mt-3 mt-md-0">
+          <Col xs={12} md={3} className="mt-3 mt-md-0">
             <ul>
               <strong>ciao</strong>
               <li className="mt-2">ciao</li>

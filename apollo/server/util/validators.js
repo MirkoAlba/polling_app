@@ -31,7 +31,11 @@ export function validateRegisterInput(
 
   if (!cellNumber) {
     errors.cellNumber = "Numero di telefono non deve essere vuoto!";
-  } //validate number
+  } else {
+    if (cellNumber.toString().trim().length !== 10) {
+      errors.cellNumber = "Numero di telefono deve essere di 10 cifre";
+    }
+  }
 
   if (email.trim() === "") {
     errors.email = "Email non deve essere vuota!";
@@ -42,6 +46,10 @@ export function validateRegisterInput(
 
     if (!email.match(regExEmail)) {
       errors.email = "Email deve essere valida!";
+    }
+
+    if (!/@gmail.com\s*$/.test(email.trim())) {
+      errors.email = "Usare email con dominio valido. Es: gmail.com";
     }
   }
 
