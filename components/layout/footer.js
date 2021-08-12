@@ -2,7 +2,7 @@ import { Container, Row, Col } from "react-bootstrap";
 export default function Footer() {
   return (
     <div className="wrapper-footer">
-      <Container className="footer pt-4 pb-2">
+      <Container className="footer pt-4">
         <Row>
           <Col xs={12} md={6}>
             Logo

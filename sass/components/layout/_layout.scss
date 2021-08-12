@@ -103,13 +103,14 @@
 //Footer
 .wrapper-footer {
   // border-top: 1px solid $white;
-  background-color: $secondary;
-  color: $primary;
+  background-color: $primary;
+  color: $secondary;
 
   height: 150px;
 
   .footer {
     .col-social {
+      background-color: $primary;
       justify-content: flex-end;
       align-items: flex-end;
 
@@ -129,12 +130,12 @@
 
 //Main
 .content {
-  margin-top: 120px;
-  // margin-bottom: 2rem;
+  margin-top: 150px;
+  margin-bottom: 150px;
 
   @include media-breakpoint-down(sm) {
     margin-top: 100px;
-    // margin-bottom: 0;
+    margin-bottom: 0;
   }
 }
 

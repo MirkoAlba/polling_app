@@ -85,7 +85,7 @@ export default function RegisterLoginForm({ isLoggedIn }) {
             className="d-none d-lg-flex align-items-center m-lg-0 p-lg-0"
           >
             <div className="wrapper w-100 d-flex align-items-center">
-              <div>Logo</div>
+              <div>Slider Pizze o logo</div>
             </div>
           </Col>
           <Col
@@ -288,7 +288,7 @@ export default function RegisterLoginForm({ isLoggedIn }) {
                   <Form.Check required aria-label="option 1" />
                   <p>
                     Accetto le condizioni della{" "}
-                    <a style={{ color: "black" }} href="#">
+                    <a style={{ color: "white" }} href="#">
                       Privacy.
                     </a>
                   </p>
@@ -313,7 +313,7 @@ export default function RegisterLoginForm({ isLoggedIn }) {
             className="d-none d-lg-flex align-items-center m-lg-0 p-lg-0 col-right"
           >
             <div className="wrapper__left w-100 d-flex align-items-center">
-              <div>Logo</div>
+              <div>Slider Pizze o logo</div>
             </div>
           </Col>
           <Col
