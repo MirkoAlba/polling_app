@@ -30,3 +30,24 @@ model Profile {
   user      User     @relation(fields: [id], references: [id])
   userId    String
 }
+
+model Category {
+  id                String @id @default(cuid())
+  categoryName      String @unique
+  categoryPathImage String
+
+  // una categoria ha 1 o molti prodotti
+  products Product[]
+}
+
+model Product {
+  id                 String @id @default(cuid())
+  productName        String @unique
+  productDescription String
+  productCost        Float
+  productImagePath   String @default(dbgenerated("path"))
+
+  // relationship: molti prodotti appartengono ad una determinata categoria
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String
+}

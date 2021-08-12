@@ -41,14 +41,14 @@ export default function Header({ isLoggedIn }) {
                     <img
                       height="40"
                       width="40"
-                      src="/pizza.svg"
+                      src="/icons/pizza.svg"
                       alt="Carrello"
                     />
                   ) : (
                     <img
                       height="40"
                       width="40"
-                      src="/pizza-red.svg"
+                      src="/icons/pizza-red.svg"
                       alt="Carrello"
                     />
                   )}
@@ -95,12 +95,17 @@ export default function Header({ isLoggedIn }) {
               <Link href="/profilo">
                 <a onClick={handleOpen} className="nav-link">
                   {scrollPosition > 200 ? (
-                    <img height="40" width="40" src="/user.svg" alt="Profilo" />
+                    <img
+                      height="40"
+                      width="40"
+                      src="/icons/user.svg"
+                      alt="Profilo"
+                    />
                   ) : (
                     <img
                       height="40"
                       width="40"
-                      src="/user-red.svg"
+                      src="/icons/user-red.svg"
                       alt="Profilo"
                     />
                   )}

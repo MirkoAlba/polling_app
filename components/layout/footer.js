@@ -19,13 +19,18 @@ export default function Footer() {
 
           <Col xs={12} md={6} className="d-flex col-social">
             <a href="#">
-              <img width="60" height="60" src="/facebook.svg" alt="Facebook" />
+              <img
+                width="60"
+                height="60"
+                src="/icons/facebook.svg"
+                alt="Facebook"
+              />
             </a>
             <a href="#">
               <img
                 width="60"
                 height="60"
-                src="/instagram.svg"
+                src="/icons/instagram.svg"
                 alt="Instagram"
               />
             </a>
