@@ -7,38 +7,38 @@ export default function Profilo({ isLoggedIn }) {
   return <div>profilo</div>;
 }
 
-// export async function getServerSideProps({ req, res }) {
-//   var token = req.cookies.jid;
+export async function getServerSideProps({ req, res }) {
+  var token = req.cookies.jid;
 
-//   var data;
-//   if (token) {
-//     data = await queryClient({
-//       query: gql`
-//         query VerifyToken($token: String!) {
-//           VerifyToken(token: $token) {
-//             message
-//             verified
-//           }
-//         }
-//       `,
-//       variables: { token },
-//     });
-//   }
+  var data;
+  if (token) {
+    data = await queryClient({
+      query: gql`
+        query VerifyToken($token: String!) {
+          VerifyToken(token: $token) {
+            message
+            verified
+          }
+        }
+      `,
+      variables: { token },
+    });
+  }
 
-//   var verificato = data?.data?.VerifyToken.verified;
+  var verificato = data?.data?.VerifyToken.verified;
 
-//   if (!verificato) {
-//     return {
-//       redirect: {
-//         permanent: false,
-//         destination: "/register",
-//       },
-//     };
-//   }
+  if (!verificato) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/register",
+      },
+    };
+  }
 
-//   return {
-//     props: {
-//       data: data ? data.data : false,
-//     },
-//   };
-// }
+  return {
+    props: {
+      data: data ? data.data : false,
+    },
+  };
+}
