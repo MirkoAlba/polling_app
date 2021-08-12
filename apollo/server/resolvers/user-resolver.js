@@ -16,6 +16,27 @@ export const userResolver = {
 
       return me ? true : false;
     },
+
+    async VerifyToken(_, { token }, context) {
+      if (!token && !context.userId) return false;
+
+      const verificato = jwt.verify(
+        token,
+        process.env.TOKEN_SECRET_KEY,
+        function (err, decoded) {
+          if (err) {
+            return {
+              message: `Token non valido: ${err.message}`,
+              verified: false,
+            };
+          } else {
+            return { message: "Verificato", verified: true };
+          }
+        }
+      );
+
+      return verificato;
+    },
   },
 
   Mutation: {
@@ -139,5 +160,24 @@ export const userResolver = {
 
       return token;
     },
+  },
+
+  async Logout(_, __, context) {
+    if (context.res) {
+      context.res.setHeader(
+        "Set-Cookie",
+        cookie.serialize("jid", "", {
+          httpOnly: true,
+          // domain: ".example.com",
+          secure: process.env.NODE_ENV !== "development",
+          maxAge: 1,
+          sameSite: "strict",
+          path: "/",
+        })
+      );
+      return true;
+    } else {
+      return false;
+    }
   },
 };

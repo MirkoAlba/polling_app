@@ -37,7 +37,21 @@ export default function Header({ isLoggedIn }) {
             {isLoggedIn && (
               <Link href="/carrello">
                 <a href="#">
-                  <img height="40" width="40" src="/pizza.svg" alt="Carrello" />
+                  {scrollPosition > 200 ? (
+                    <img
+                      height="40"
+                      width="40"
+                      src="/pizza.svg"
+                      alt="Carrello"
+                    />
+                  ) : (
+                    <img
+                      height="40"
+                      width="40"
+                      src="/pizza-red.svg"
+                      alt="Carrello"
+                    />
+                  )}
                 </a>
               </Link>
             )}
@@ -78,9 +92,18 @@ export default function Header({ isLoggedIn }) {
             )}
 
             {isLoggedIn && (
-              <Link href="/register">
-                <a className="nav-link">
-                  <img height="40" width="40" src="/user.svg" alt="Profilo" />
+              <Link href="/profilo">
+                <a onClick={handleOpen} className="nav-link">
+                  {scrollPosition > 200 ? (
+                    <img height="40" width="40" src="/user.svg" alt="Profilo" />
+                  ) : (
+                    <img
+                      height="40"
+                      width="40"
+                      src="/user-red.svg"
+                      alt="Profilo"
+                    />
+                  )}
                 </a>
               </Link>
             )}

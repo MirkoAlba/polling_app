@@ -1,6 +1,12 @@
 import { gql } from "apollo-server-micro";
 
 export const typeDefs = gql`
+  # ---------- Error Types ----------
+  type TokenError {
+    message: String!
+    verified: Boolean!
+  }
+
   # ---------- Scalar Types ----------
   scalar BigInt
 
@@ -45,6 +51,7 @@ export const typeDefs = gql`
   type Query {
     # User
     Me: Boolean!
+    VerifyToken(token: String!): TokenError!
   }
 
   type Mutation {

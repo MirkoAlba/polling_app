@@ -34,7 +34,8 @@ export default function RegisterLoginForm({ isLoggedIn }) {
     onCompleted: (data) => {
       // setto token ritornato dalla login mutation
       setAccessToken(data.Login);
-      router.push("/");
+      // router.push("/");
+      router.reload();
     },
     onError: (err) => {
       if (err) {
@@ -46,7 +47,6 @@ export default function RegisterLoginForm({ isLoggedIn }) {
 
   const [register] = useMutation(REGISTER_MUTATION, {
     variables: { registerInput },
-    // onCompleted: (data) => console.log(data.Register),
     onError: (err) => {
       setErrors(err.graphQLErrors[0]?.extensions.exception.errors);
     },

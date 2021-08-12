@@ -1,41 +1,17 @@
 import "../sass/index.scss"; //scss style
 import Layout from "../components/layout/layout";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import cookie from "cookie";
 import App from "next/app";
 import { AuthProvider } from "../apollo/client/apollo-client";
-import { setAccessToken } from "../apollo/client/accessToken";
-import { getStandaloneApolloClient } from "../apollo/client/apollo-client";
 import { gql } from "@apollo/client";
-
-async function getCurrUser() {
-  const client = await getStandaloneApolloClient();
-  // la query ritora true o false
-  const { data } = await client.query({
-    query: gql`
-      query {
-        Me
-      }
-    `,
-    // fetchPolicy: "cache-first",
-  });
-
-  return data?.Me;
-}
+import { queryClient } from "../helpers/query-client";
+import { setAccessToken } from "../apollo/client/accessToken";
 
 function MyApp({ Component, pageProps, token }) {
-  setAccessToken(token);
-
-  const [isLoggedIn, setIsLoggedIn] = useState();
-
-  useEffect(async () => {
-    // faccio Me query ogni volta che ri-rendera per verificare user loggato
-    // in questo modo sono sicuro che jwt è stato verificato server-side
-    const user = await getCurrUser();
-    setIsLoggedIn(user);
-  }); //eseguo ogni volta che _app re-rendera
+  const [isLoggedIn, setIsLoggedIn] = useState(token.verified);
 
   return (
     <AuthProvider>
@@ -56,10 +32,26 @@ MyApp.getInitialProps = async (appContext) => {
     tokenInCookie = cookie.parse(appContext.ctx.req?.headers.cookie);
   }
 
-  // se non è presente il cookie vuol dire che non è stata fatta la login
+  var token = tokenInCookie ? tokenInCookie.jid : "tokenfasullo"; //estraggo token dal cookie
+  setAccessToken(token); //setto il token per averlo a disposizione nei resolver tramite context
+  var data;
+  //verifico token facendo query all API
+  data = await queryClient({
+    query: gql`
+      query VerifyToken($token: String!) {
+        VerifyToken(token: $token) {
+          message
+          verified
+        }
+      }
+    `,
+    variables: { token },
+  });
 
-  // ritorno il token nelle props
-  return { ...appProps, token: tokenInCookie?.jid };
+  const response = data?.data?.VerifyToken;
+
+  // ritorno oggetto verificato nelle props
+  return { ...appProps, token: response };
 };
 
 export default MyApp;
