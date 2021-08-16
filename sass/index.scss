@@ -1,7 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Krona+One&display=swap");
 @import "./custom-variables.scss"; //override bootstrap variables
 @import "../node_modules/bootstrap/scss/bootstrap"; //imported all bootstrap scss
 
 //Style Components
-@import "./components/layout/layout"; //layout: Header, Footer
+@import "./components/layout/layout"; // layout: Header, Footer
 @import "./components/register/form"; // register/login form
-@import "./globals";
+@import "./globals"; //stile globale
+@import "./components/home/hero"; // hero
+@import "./components/home/category-card"; // category-card

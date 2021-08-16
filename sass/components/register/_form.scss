@@ -51,36 +51,6 @@
   }
 }
 
-.btn {
-  padding: 0.5rem 1rem;
-  text-decoration: none;
-  font-size: 1.25rem;
-  text-transform: uppercase;
-  border-radius: 30px;
-  border-color: $primary !important;
-  background: $white;
-  color: $primary;
-  transition: 0.1s ease-in-out;
-
-  &:hover {
-    color: $white;
-    background: $primary;
-    border-color: $white;
-  }
-
-  &__inverted {
-    border-color: $white !important;
-    background: $white;
-    color: $primary;
-
-    &:hover {
-      color: $white;
-      background: $primary;
-      border-color: $white;
-    }
-  }
-}
-
 .change-tab {
   cursor: pointer;
 }

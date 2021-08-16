@@ -47,7 +47,7 @@ model Product {
   productCost        Float
   productImagePath   String @default(dbgenerated("path"))
 
-  // relationship: molti prodotti appartengono ad una determinata categoria
+  //relazione: molti prodotti appartengono ad una determinata categoria
   category   Category @relation(fields: [categoryId], references: [id])
   categoryId String
 }

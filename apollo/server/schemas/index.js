@@ -10,7 +10,7 @@ export const typeDefs = gql`
   # ---------- Scalar Types ----------
   scalar BigInt
 
-  # ---------- Types ----------
+  # ---------- User Types ----------
   type User {
     id: ID!
     firstName: String!
@@ -35,6 +35,25 @@ export const typeDefs = gql`
     userId: ID!
   }
 
+  # ---------- Products Types ----------
+  type Category {
+    id: ID!
+    categoryName: String!
+    categoryPathImage: String!
+    products: [Product!]! #field level resolver
+  }
+
+  type Product {
+    id: ID!
+    productName: String!
+    productDescription: String!
+    productCost: Float!
+    productImagePath: String!
+    # category relationship
+    category: Category! #field level resolver
+    categoryId: ID!
+  }
+
   # ---------- Inputs ----------
 
   input RegisterInput {
@@ -52,6 +71,10 @@ export const typeDefs = gql`
     # User
     Me: Boolean!
     VerifyToken(token: String!): TokenError!
+
+    # Products Categories
+    GetCategories: [Category]!
+    GetProducts: [Product]!
   }
 
   type Mutation {

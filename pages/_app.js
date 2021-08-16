@@ -1,4 +1,5 @@
 import "../sass/index.scss"; //scss style
+
 import Layout from "../components/layout/layout";
 
 import { useState } from "react";

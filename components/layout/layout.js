@@ -1,15 +1,12 @@
 import { Fragment } from "react";
 import Header from "./header";
 import Footer from "./footer";
-import { Container } from "react-bootstrap";
 
 export default function Layout(props) {
   return (
     <Fragment>
       <Header isLoggedIn={props.isLoggedIn} />
-      <Container>
-        <main className="content">{props.children}</main>
-      </Container>
+      <main className="content">{props.children}</main>
       <Footer />
     </Fragment>
   );
