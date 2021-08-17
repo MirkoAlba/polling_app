@@ -35,6 +35,7 @@ model Category {
   id                String @id @default(cuid())
   categoryName      String @unique
   categoryPathImage String
+  categoryOrder     Int    @default(1)
 
   // una categoria ha 1 o molti prodotti
   products Product[]

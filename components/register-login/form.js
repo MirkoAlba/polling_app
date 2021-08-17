@@ -82,7 +82,7 @@ export default function RegisterLoginForm({ isLoggedIn }) {
           <Fragment>
             <Col
               xs={12}
-              lg={5}
+              lg={4}
               className="d-none d-lg-flex align-items-center m-lg-0 p-lg-0"
             >
               <div className="wrapper w-100 d-flex align-items-center">
@@ -91,7 +91,7 @@ export default function RegisterLoginForm({ isLoggedIn }) {
             </Col>
             <Col
               xs={12}
-              lg={7}
+              lg={8}
               className="d-flex align-items-center m-lg-0 p-lg-0 col-right"
             >
               <div className="wrapper wrapper__right w-100 d-flex align-items-center">
@@ -213,7 +213,7 @@ export default function RegisterLoginForm({ isLoggedIn }) {
                     <Form.Control
                       className="form-input"
                       type="text"
-                      placeholder="Inserisci il tuo Numero di telefono"
+                      placeholder="Inserisci il Numero di telefono"
                       onChange={(e) => removeSpace(e)}
                       isInvalid={errors.cellNumber ? true : false}
                     />
@@ -288,9 +288,9 @@ export default function RegisterLoginForm({ isLoggedIn }) {
                     </Form.Control.Feedback>
                   </div>
 
-                  <div className="d-flex ">
+                  <div className="d-flex mb-3">
                     <Form.Check required aria-label="option 1" />
-                    <p>
+                    <p className="privacy">
                       Accetto le condizioni della{" "}
                       <a style={{ color: "white" }} href="#">
                         Privacy.
@@ -313,7 +313,7 @@ export default function RegisterLoginForm({ isLoggedIn }) {
           <Fragment>
             <Col
               xs={12}
-              lg={5}
+              lg={4}
               className="d-none d-lg-flex align-items-center m-lg-0 p-lg-0 col-right"
             >
               <div className="wrapper__left w-100 d-flex align-items-center">
@@ -322,7 +322,7 @@ export default function RegisterLoginForm({ isLoggedIn }) {
             </Col>
             <Col
               xs={12}
-              lg={7}
+              lg={8}
               className="d-flex align-items-center m-lg-0 p-lg-0 col-right"
             >
               <div className="wrapper__right w-100 d-flex align-items-center">

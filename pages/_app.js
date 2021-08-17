@@ -1,8 +1,10 @@
-import "../sass/index.scss"; //scss style
+import "../sass/custom.scss"; //scss style
 
 import Layout from "../components/layout/layout";
 
 import { useState } from "react";
+import Head from "next/head";
+import useWindowDimensions from "../helpers/checkViewport";
 
 import cookie from "cookie";
 import App from "next/app";
@@ -12,12 +14,31 @@ import { queryClient } from "../helpers/query-client";
 import { setAccessToken } from "../apollo/client/accessToken";
 
 function MyApp({ Component, pageProps, token }) {
-  const [isLoggedIn, setIsLoggedIn] = useState(token.verified);
+  const [isLoggedIn] = useState(token.verified);
+  const { width, height } = useWindowDimensions();
+
+  //serve per patchare le proprietà che non vanno su alcuni browser (scrollIntoView safari)
 
   return (
     <AuthProvider>
-      <Layout isLoggedIn={isLoggedIn}>
-        <Component {...pageProps} isLoggedIn={isLoggedIn} />
+      <Head>
+        <script>window.__forceSmoothScrollPolyfill__ = true;</script>
+        <script src="https://unpkg.com/react/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <script src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.js"></script>
+      </Head>
+      <Layout
+        viewportWidth={width}
+        viewportHeight={height}
+        isLoggedIn={isLoggedIn}
+      >
+        <Component
+          {...pageProps}
+          viewportWidth={width}
+          viewportHeight={height}
+          isLoggedIn={isLoggedIn}
+        />
       </Layout>
     </AuthProvider>
   );

@@ -1,7 +1,18 @@
+* {
+  -webkit-overflow-scrolling: touch;
+}
+
 body {
   color: $white;
   background-color: $black;
   font-family: "Krona One", sans-serif;
+}
+
+.orange {
+  color: $orange;
+}
+.blue {
+  color: $blue;
 }
 
 .btn {

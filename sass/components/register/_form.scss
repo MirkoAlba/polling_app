@@ -1,6 +1,14 @@
 .row-form {
   min-height: calc(100vh - 120px - 150px);
 
+  .privacy {
+    margin-top: auto;
+    margin-bottom: auto;
+    @include media-breakpoint-down(sm) {
+      font-size: 0.75rem;
+    }
+  }
+
   @include media-breakpoint-down(sm) {
     min-height: calc(100vh - 100px);
   }
@@ -48,6 +56,10 @@
 
   &::placeholder {
     color: $white;
+  }
+
+  @include media-breakpoint-down(sm) {
+    font-size: 0.75rem;
   }
 }
 

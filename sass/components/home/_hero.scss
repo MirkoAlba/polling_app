@@ -1,5 +1,5 @@
 .hero {
-  height: 400px;
+  height: calc(100vh - 120px);
   background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%),
     url("../../../public/categorie/pizza.jpeg");
   background-repeat: no-repeat;
@@ -7,7 +7,7 @@
   background-size: cover;
 
   @include media-breakpoint-down(sm) {
-    height: 200px;
+    height: calc(100vh - 100px);
   }
 
   &__container {
@@ -22,13 +22,11 @@
         font-size: 1.5rem;
       }
     }
-
-    .scopri {
-      margin-left: 0.5rem;
-    }
-
-    .ordina {
-      margin-right: 0.5rem;
-    }
   }
+}
+
+.fix-scroll {
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
