@@ -83,7 +83,7 @@ export default function RegisterLoginForm({ isLoggedIn }) {
             <Col
               xs={12}
               lg={4}
-              className="d-none d-lg-flex align-items-center m-lg-0 p-lg-0"
+              className="d-none d-lg-flex align-items-center p-lg-0"
             >
               <div className="wrapper w-100 d-flex align-items-center">
                 <div>Slider Pizze o logo</div>
@@ -92,7 +92,7 @@ export default function RegisterLoginForm({ isLoggedIn }) {
             <Col
               xs={12}
               lg={8}
-              className="d-flex align-items-center m-lg-0 p-lg-0 col-right"
+              className="d-flex align-items-center p-lg-0 col-right"
             >
               <div className="wrapper wrapper__right w-100 d-flex align-items-center">
                 <Form
@@ -314,7 +314,7 @@ export default function RegisterLoginForm({ isLoggedIn }) {
             <Col
               xs={12}
               lg={4}
-              className="d-none d-lg-flex align-items-center m-lg-0 p-lg-0 col-right"
+              className="d-none d-lg-flex align-items-center p-lg-0 col-right"
             >
               <div className="wrapper__left w-100 d-flex align-items-center">
                 <div>Slider Pizze o logo</div>
@@ -323,7 +323,7 @@ export default function RegisterLoginForm({ isLoggedIn }) {
             <Col
               xs={12}
               lg={8}
-              className="d-flex align-items-center m-lg-0 p-lg-0 col-right"
+              className="d-flex align-items-center p-lg-0 col-right"
             >
               <div className="wrapper__right w-100 d-flex align-items-center">
                 <Form onSubmit={(e) => handleSubmitLogin(e)} className="w-100">

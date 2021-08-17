@@ -32,6 +32,10 @@
       min-height: 50%;
       padding: 2rem;
       box-shadow: -10px -10px 0px $blue, 10px 10px 0px $orange;
+
+      strong {
+        border-bottom: 2px solid $orange;
+      }
     }
   }
 }
