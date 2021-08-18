@@ -20,8 +20,15 @@ export default function CategoryCard({ categories }) {
           return (
             <Col key={c.id} xs={12} md={6} className="py-5">
               <Link href={`/categorie/${c.categoryName.toLowerCase()}`}>
-                <a className="category-card">
-                  <div className="category-card__container text-center py-3">
+                <a className={`category-card ${c.categoryPathImage}`}>
+                  <div
+                    style={{
+                      background: `url('${c.categoryPathImage}')`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
+                    className="category-card__container text-center py-3"
+                  >
                     <h2 className="category-card__container__title ">
                       {c.categoryName}
                     </h2>
