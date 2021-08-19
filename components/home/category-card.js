@@ -19,7 +19,7 @@ export default function CategoryCard({ categories }) {
         {categories.map((c) => {
           return (
             <Col key={c.id} xs={12} md={6} className="py-5">
-              <Link href={`/categorie/${c.categoryName.toLowerCase()}`}>
+              <Link href={`/prodotti/${c.categoryName.toLowerCase()}`}>
                 <a className={`category-card ${c.categoryPathImage}`}>
                   <div
                     style={{

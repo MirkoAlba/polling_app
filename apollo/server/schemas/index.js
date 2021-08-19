@@ -73,8 +73,10 @@ export const typeDefs = gql`
     VerifyToken(token: String!): TokenError!
 
     # Products Categories
-    GetCategories: [Category]!
-    GetProducts: [Product]!
+    GetAllCategories: [Category]!
+    GetCategory(categoryName: String!): String!
+    GetAllProducts: [Product]!
+    GetProductsByCategory(categoryName: String!): [Product]
   }
 
   type Mutation {
