@@ -1,12 +1,18 @@
 import { Container, Row, Col } from "react-bootstrap";
 
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_PRODUCTS_BY_CATEGORY } from "../../graphql/queries";
 
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+
 import { capitalize } from "../../helpers/general";
 
-export default function Grid({ categoryName }) {
+export default function Grid({ categoryName, isLoggedIn }) {
+  const router = useRouter();
+
   const [products, setProducts] = useState([]);
 
   const { loading, _data, error } = useQuery(GET_PRODUCTS_BY_CATEGORY, {
@@ -19,33 +25,66 @@ export default function Grid({ categoryName }) {
   return (
     <Container>
       <Row>
-        <h1 className="text-center mb-4 mb-md-5">{capitalize(categoryName)}</h1>
+        <h1 className="text-center mb-2 mb-md-5">{capitalize(categoryName)}</h1>
       </Row>
 
-      <Row>
+      <Row className="mb-5">
         {error
           ? "Errore ricarica la pagina"
           : loading
           ? "caricamento..."
           : products.map((p) => {
-              console.log(p.productImagePath);
               return (
                 <Col
                   key={p.id}
                   xs={{ span: 10, offset: 1 }}
                   md={{ span: 6, offset: 0 }}
                   lg={4}
+                  className="pb-3"
                 >
                   <div className="product-card">
-                    {/* <div
-                      style={{
-                        background: `url('${p.productImagePath}')`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                      }}
-                      className="product-card__image mx-auto"
-                    ></div> */}
-                    <h3 className="text-center my-4">{p.productName}</h3>
+                    <div className="product-card__container mx-auto position-relative">
+                      <h3 className="text-center my-4 ">{p.productName}</h3>
+                      <Row className="shadow-none">
+                        <Col className="shadow-none" xs={6}>
+                          <Image
+                            className="product-card__container__image"
+                            src={p.productImagePath}
+                            width="200"
+                            height="200"
+                          />
+                        </Col>
+
+                        <Col xs={6} className="text-center my-auto">
+                          {isLoggedIn ? (
+                            <Fragment>
+                              <Link
+                                href={`/prodotti/${
+                                  router.query.categoryName
+                                }/${p.productName
+                                  .replace(/\s/g, "-")
+                                  .toLowerCase()}`}
+                              >
+                                <a className="btn btn__inverted mb-2">Scopri</a>
+                              </Link>
+                              <a href="#" className="btn btn__inverted mt-2">
+                                Aggiungi
+                              </a>
+                            </Fragment>
+                          ) : (
+                            <Link
+                              href={`/prodotti/${
+                                router.query.categoryName
+                              }/${p.productName
+                                .replace(/\s/g, "-")
+                                .toLowerCase()}`}
+                            >
+                              <a className="btn btn__inverted mb-2">Scopri</a>
+                            </Link>
+                          )}
+                        </Col>
+                      </Row>
+                    </div>
                   </div>
                 </Col>
               );

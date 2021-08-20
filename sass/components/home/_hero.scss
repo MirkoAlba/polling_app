@@ -7,7 +7,7 @@
   background-size: cover;
 
   @include media-breakpoint-down(sm) {
-    height: calc(100vh - 100px);
+    height: calc(100vh - 80px);
   }
 
   &__container {

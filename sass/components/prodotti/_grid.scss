@@ -1,6 +1,21 @@
 .product-card {
-  &__image {
-    box-shadow: 5px 5px 0px $orange;
-    padding: 5rem;
+  &__container {
+    @include media-breakpoint-down(md) {
+      text-align: center;
+    }
+
+    div:first-of-type {
+      box-shadow: 5px 5px 0px $orange;
+    }
+
+    &__btn-wrapper {
+      .btn {
+        &--info {
+          @include media-breakpoint-down(md) {
+            width: 75%;
+          }
+        }
+      }
+    }
   }
 }

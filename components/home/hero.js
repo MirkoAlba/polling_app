@@ -23,7 +23,7 @@ export default function Hero({
 
       <div
         className="fix-scroll"
-        style={{ height: viewportWidth < 568 ? "100px" : "120px" }}
+        style={{ height: viewportWidth < 568 ? "80px" : "120px" }}
         ref={myRef}
       ></div>
     </div>
