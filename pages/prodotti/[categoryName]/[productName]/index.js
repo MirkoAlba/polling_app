@@ -1,22 +1,15 @@
-import { Container, Row, Col } from "react-bootstrap";
+import SingleProduct from "../../../../components/prodotti/single-product";
 
 import { capitalizeEveryWord } from "../../../../helpers/general";
 import { createPrismaClient } from "../../../../apollo/server/db/context";
 
-export default function ProductName({ isLoggedIn, product }) {
-  console.log(product);
+export default function ProductName({ isLoggedIn, viewportWidth, product }) {
   return (
-    <Container>
-      <Row>
-        <Col xs={12} md={6}>
-          ciao
-        </Col>
-
-        <Col xs={12} md={6}>
-          ciao
-        </Col>
-      </Row>
-    </Container>
+    <SingleProduct
+      isLoggedIn={isLoggedIn}
+      viewportWidth={viewportWidth}
+      product={product}
+    />
   );
 }
 

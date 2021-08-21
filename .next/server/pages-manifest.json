@@ -2,5 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/prodotti/[categoryName]/[productName]": "pages/prodotti/[categoryName]/[productName].js"
+  "/api/graphql": "pages/api/graphql.js",
+  "/prodotti/[categoryName]/[productName]": "pages/prodotti/[categoryName]/[productName].js",
+  "/prodotti/[categoryName]": "pages/prodotti/[categoryName].js",
+  "/register": "pages/register.js"
 }
