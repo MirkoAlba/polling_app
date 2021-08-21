@@ -29,7 +29,6 @@ export function createContext(res, req) {
     }
   }
 
-  console.log("sono in createContext: Not auth header");
-
+  // console.log("sono in createContext: Not auth header");
   return { res, req, prisma, userId: verified?.profileId };
 }

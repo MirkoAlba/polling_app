@@ -4,7 +4,7 @@ import { Fragment, useRef } from "react";
 
 import { createPrismaClient } from "../apollo/server/db/context";
 
-export default function Home({ isLoggedIn, viewportWidth, categories }) {
+export default function Home({ userId, viewportWidth, categories }) {
   const myRef = useRef(null);
   const executeScroll = () => {
     myRef.current.scrollIntoView({ behavior: "smooth" });
@@ -14,7 +14,7 @@ export default function Home({ isLoggedIn, viewportWidth, categories }) {
       <Hero
         myRef={myRef}
         executeScroll={executeScroll}
-        isLoggedIn={isLoggedIn}
+        userId={userId}
         viewportWidth={viewportWidth}
       />
       <CategoryCard categories={categories} />

@@ -3,7 +3,7 @@ import Header from "./header";
 import Footer from "./footer";
 
 export default function Layout({
-  isLoggedIn,
+  userId,
   viewportWidth,
   viewportHeight,
   children,
@@ -13,7 +13,7 @@ export default function Layout({
       <Header
         viewportWidth={viewportWidth}
         viewportHeight={viewportHeight}
-        isLoggedIn={isLoggedIn}
+        userId={userId}
       />
       <main className="content">{children}</main>
       <Footer />

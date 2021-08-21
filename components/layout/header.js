@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Navbar, Container } from "react-bootstrap";
 import Link from "next/link";
 
-export default function Header({ isLoggedIn }) {
+export default function Header({ userId }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(!open);
 
@@ -34,7 +34,7 @@ export default function Header({ isLoggedIn }) {
           </Navbar.Brand>
 
           <div className="wrapper-icons">
-            {isLoggedIn && (
+            {userId && (
               <Link href="/carrello">
                 <a href="#">
                   {scrollPosition > 200 ? (
@@ -83,7 +83,7 @@ export default function Header({ isLoggedIn }) {
           </div>
 
           <Navbar.Collapse className={open ? "open" : "closed"}>
-            {!isLoggedIn && (
+            {!userId && (
               <Link href="/register">
                 <a onClick={handleOpen} className="nav-link">
                   Accedi/Registrati
@@ -91,7 +91,7 @@ export default function Header({ isLoggedIn }) {
               </Link>
             )}
 
-            {isLoggedIn && (
+            {userId && (
               <Link href="/profilo">
                 <a onClick={handleOpen} className="nav-link">
                   {scrollPosition > 200 ? (

@@ -2,7 +2,7 @@ import RegisterLoginForm from "../components/register-login/form";
 import { queryClient } from "../helpers/query-client";
 import { gql } from "@apollo/client";
 
-export default function Register({ isLoggedIn }) {
+export default function Register() {
   return <RegisterLoginForm />;
 }
 

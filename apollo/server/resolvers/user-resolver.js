@@ -7,14 +7,15 @@ import { AuthenticationError, UserInputError } from "apollo-server-micro";
 
 export const userResolver = {
   Query: {
-    async Me(_, __, context) {
-      if (!context.userId) return false;
-
-      const me = await context.prisma.user.findUnique({
-        where: { id: context.userId },
+    async Me(_, { id }, context) {
+      const me = await context?.prisma?.user.findUnique({
+        where: { id },
+        include: {
+          profile: true,
+        },
       });
 
-      return me ? true : false;
+      return me;
     },
 
     async VerifyToken(_, { token }, context) {
@@ -30,7 +31,11 @@ export const userResolver = {
               verified: false,
             };
           } else {
-            return { message: "Verificato", verified: true };
+            return {
+              message: "Verificato",
+              verified: true,
+              userId: decoded.profileId,
+            };
           }
         }
       );

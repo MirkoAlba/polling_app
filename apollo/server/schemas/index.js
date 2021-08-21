@@ -2,9 +2,10 @@ import { gql } from "apollo-server-micro";
 
 export const typeDefs = gql`
   # ---------- Error Types ----------
-  type TokenError {
+  type TokenResponse {
     message: String!
     verified: Boolean!
+    userId: ID!
   }
 
   # ---------- Scalar Types ----------
@@ -14,10 +15,10 @@ export const typeDefs = gql`
   type User {
     id: ID!
     firstName: String!
-    lastname: String!
+    lastName: String!
     cellNumber: BigInt!
     # relation Profile
-    profile: Profile!
+    profile: Profile! #campo deve essere uguale a quello nei top-level resolver
     profileId: ID!
   }
 
@@ -31,7 +32,7 @@ export const typeDefs = gql`
     createdAt: String
 
     # relation User
-    user: User!
+    user: User! #campo deve essere uguale a quello nei top-level resolver
     userId: ID!
   }
 
@@ -69,8 +70,8 @@ export const typeDefs = gql`
 
   type Query {
     # User
-    Me: Boolean!
-    VerifyToken(token: String!): TokenError!
+    Me(id: String!): User!
+    VerifyToken(token: String!): TokenResponse!
 
     # Products Categories
     GetAllCategories: [Category]!

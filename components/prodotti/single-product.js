@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import { breakpoint } from "../../helpers/general";
 
-export default function SingleProduct({ isLoggedIn, viewportWidth, product }) {
+export default function SingleProduct({ userId, viewportWidth, product }) {
   const smart = viewportWidth < breakpoint.sm;
   const desk = viewportWidth > breakpoint.sm;
 
@@ -29,7 +29,9 @@ export default function SingleProduct({ isLoggedIn, viewportWidth, product }) {
           xs={6}
           className="single-product__row__col--right d-flex flex-column justify-content-center"
         >
-          <h2 className="mb-3 mb-lg-5 text-md-center">{product.productName}</h2>
+          <h2 className="mb-3 mb-lg-5 text-md-center product-name">
+            {product.productName}
+          </h2>
           <p>
             <span className="text-primary">Prezzo: </span>
             {product.productCost} €
@@ -39,7 +41,7 @@ export default function SingleProduct({ isLoggedIn, viewportWidth, product }) {
             {product.productDescription}
           </p>
           {desk &&
-            (isLoggedIn ? (
+            (userId ? (
               <a href="#" className="btn btn__inverted">
                 Aggiungi all' ordine
               </a>
@@ -54,7 +56,7 @@ export default function SingleProduct({ isLoggedIn, viewportWidth, product }) {
 
         {smart && (
           <Col xs={12} className="text-center">
-            {isLoggedIn ? (
+            {userId ? (
               <a href="#" className="btn btn__inverted">
                 Aggiungi all' ordine
               </a>

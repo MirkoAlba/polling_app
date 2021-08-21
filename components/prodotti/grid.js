@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 
 import { capitalize } from "../../helpers/general";
 
-export default function Grid({ categoryName, isLoggedIn }) {
+export default function Grid({ categoryName, userId }) {
   const router = useRouter();
 
   const [products, setProducts] = useState([]);
@@ -56,7 +56,7 @@ export default function Grid({ categoryName, isLoggedIn }) {
                         </Col>
 
                         <Col xs={6} className="text-center my-auto">
-                          {isLoggedIn ? (
+                          {userId ? (
                             <Fragment>
                               <Link
                                 href={`/prodotti/${

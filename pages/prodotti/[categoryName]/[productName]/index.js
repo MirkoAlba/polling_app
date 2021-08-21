@@ -3,10 +3,10 @@ import SingleProduct from "../../../../components/prodotti/single-product";
 import { capitalizeEveryWord } from "../../../../helpers/general";
 import { createPrismaClient } from "../../../../apollo/server/db/context";
 
-export default function ProductName({ isLoggedIn, viewportWidth, product }) {
+export default function ProductName({ userId, viewportWidth, product }) {
   return (
     <SingleProduct
-      isLoggedIn={isLoggedIn}
+      userId={userId}
       viewportWidth={viewportWidth}
       product={product}
     />

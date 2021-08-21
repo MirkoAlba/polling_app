@@ -15,6 +15,30 @@ export const resolvers = {
   },
 
   //---------- Top-level resolvers ----------
+  User: {
+    profile: async (parent, _, context) => {
+      const profile = await context?.prisma?.profile.findUnique({
+        where: {
+          id: parent.id,
+        },
+      });
+
+      return profile;
+    },
+  },
+
+  Profile: {
+    user: async (parent, _, context) => {
+      const user = await context?.prisma?.user.findUnique({
+        where: {
+          id: parent.id,
+        },
+      });
+
+      return user;
+    },
+  },
+
   Category: {
     products: async (parent, _, context) => {
       // cerco i prodotti che hanno categoryId === parent.id (id della categoria)

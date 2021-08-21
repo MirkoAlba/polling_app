@@ -3,8 +3,8 @@ import Grid from "../../../components/prodotti/grid";
 
 // /prodotti/[categoryName]
 // ex: /prodotti/pizze
-export default function CategoryName({ isLoggedIn, categoryName }) {
-  return <Grid isLoggedIn={isLoggedIn} categoryName={categoryName} />;
+export default function CategoryName({ userId, categoryName }) {
+  return <Grid userId={userId} categoryName={categoryName} />;
 }
 
 export async function getStaticProps(context) {

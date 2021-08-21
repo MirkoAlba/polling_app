@@ -8,7 +8,7 @@ import Image from "next/image";
 
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 
-export default function RegisterLoginForm({ isLoggedIn }) {
+export default function RegisterLoginForm() {
   const router = useRouter();
 
   const [showForm, setShowForm] = useState(false);
@@ -334,10 +334,10 @@ export default function RegisterLoginForm({ isLoggedIn }) {
                       type="email"
                       placeholder="Inserisci la tua E-mail"
                       onChange={(e) => setUserEmail(e.target.value)}
-                      isInvalid={errors.userEmail ? true : false}
+                      isInvalid={errors.email ? true : false}
                     />
                     <Form.Control.Feedback type="invalid">
-                      {errors.userEmail}
+                      {errors.email}
                     </Form.Control.Feedback>
                   </div>
 
@@ -348,10 +348,10 @@ export default function RegisterLoginForm({ isLoggedIn }) {
                       type="password"
                       placeholder="Inserisci la tua E-mail"
                       onChange={(e) => setUserPassword(e.target.value)}
-                      isInvalid={errors.userPassword ? true : false}
+                      isInvalid={errors.password ? true : false}
                     />
                     <Form.Control.Feedback type="invalid">
-                      {errors.userPassword}
+                      {errors.password}
                     </Form.Control.Feedback>
                   </div>
 

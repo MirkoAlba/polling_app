@@ -36,11 +36,28 @@ export function getStandaloneApolloClient() {
     if (networkError) console.log(`[Network error]: ${networkError}`);
   });
 
+  // const authLink = new ApolloLink((operation, next) => {
+  //   // prendo il token
+  //   // token = getAccessToken();
+
+  //   token = operation.variables.token;
+
+  //   console.log(operation);
+
+  //   operation.setContext((context) => ({
+  //     ...context,
+  //     headers: {
+  //       ...context.headers,
+  //       authorization: token ? `Bearer ${token}` : "", //lo passo negli headers della req
+  //     },
+  //   }));
+
+  //   return next(operation);
+  // });
+
   const authLink = setContext((_, { headers }) => {
     // prendo il token
     const token = getAccessToken();
-
-    // console.log("client:", token);
 
     return {
       headers: {
@@ -59,10 +76,10 @@ export function getStandaloneApolloClient() {
   });
 
   return new ApolloClient({
+    ssrMode: typeof window === "undefined",
     link: ApolloLink.from([errorLink, authLink.concat(httpLink)]),
     // link: ApolloLink.from([errorLink.concat(httpLink)]),
     cache: new InMemoryCache(),
-    credentials: "include",
   });
 }
 

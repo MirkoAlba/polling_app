@@ -13,8 +13,8 @@ import { gql } from "@apollo/client";
 import { queryClient } from "../helpers/query-client";
 import { setAccessToken } from "../apollo/client/accessToken";
 
-function MyApp({ Component, pageProps, token }) {
-  const [isLoggedIn] = useState(token.verified);
+function MyApp({ Component, pageProps, tokenResponse }) {
+  const [userId] = useState(tokenResponse.userId);
   const { width, height } = useWindowDimensions();
 
   //serve per patchare le proprietà che non vanno su alcuni browser (scrollIntoView safari)
@@ -28,16 +28,12 @@ function MyApp({ Component, pageProps, token }) {
         <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
         <script src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.js"></script>
       </Head>
-      <Layout
-        viewportWidth={width}
-        viewportHeight={height}
-        isLoggedIn={isLoggedIn}
-      >
+      <Layout viewportWidth={width} viewportHeight={height} userId={userId}>
         <Component
           {...pageProps}
           viewportWidth={width}
           viewportHeight={height}
-          isLoggedIn={isLoggedIn}
+          userId={userId}
         />
       </Layout>
     </AuthProvider>
@@ -64,16 +60,17 @@ MyApp.getInitialProps = async (appContext) => {
         VerifyToken(token: $token) {
           message
           verified
+          userId
         }
       }
     `,
     variables: { token },
   });
 
-  const response = data?.data?.VerifyToken;
+  const tokenResponse = data?.data?.VerifyToken;
 
   // ritorno oggetto verificato nelle props
-  return { ...appProps, token: response };
+  return { ...appProps, tokenResponse };
 };
 
 export default MyApp;

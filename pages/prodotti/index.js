@@ -1,3 +1,3 @@
-export default function Prodotti({ isLoggedIn }) {
+export default function Prodotti() {
   return <div>prodotti</div>;
 }

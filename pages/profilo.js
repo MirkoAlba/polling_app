@@ -1,10 +1,11 @@
 import { queryClient } from "../helpers/query-client";
 import { gql } from "@apollo/client";
 
-import Router from "next/router";
+import Profile from "../components/profile/profile";
 
-export default function Profilo({ isLoggedIn }) {
-  return <div>profilo</div>;
+export default function Profilo({ userId }) {
+  //non c'è bisogno di controllare isLoggedIn perchè questa route è protetta da getServerSideProps
+  return <Profile userId={userId} />;
 }
 
 export async function getServerSideProps({ req, res }) {
@@ -18,6 +19,7 @@ export async function getServerSideProps({ req, res }) {
           VerifyToken(token: $token) {
             message
             verified
+            userId
           }
         }
       `,
@@ -38,7 +40,7 @@ export async function getServerSideProps({ req, res }) {
 
   return {
     props: {
-      data: data ? data.data : false,
+      verificato,
     },
   };
 }

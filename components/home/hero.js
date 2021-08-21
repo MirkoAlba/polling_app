@@ -1,11 +1,6 @@
 import Link from "next/link";
 
-export default function Hero({
-  isLoggedIn,
-  viewportWidth,
-  myRef,
-  executeScroll,
-}) {
+export default function Hero({ userId, viewportWidth, myRef, executeScroll }) {
   return (
     <div className="hero position-relative">
       <div className="hero__container d-flex flex-column justify-content-around align-items-center">
