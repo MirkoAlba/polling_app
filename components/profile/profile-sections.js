@@ -1,7 +1,20 @@
 import { Col } from "react-bootstrap";
 
+import { useMutation } from "@apollo/client";
+import { LOGOUT } from "../../graphql/mutations";
+
+// import { useRouter } from "next/router";
+
 export default function ProfileSections({ selected, user }) {
-  console.log(user);
+  // const router = useRouter();
+  const [logout] = useMutation(LOGOUT, {
+    onCompleted: (data) => {
+      if (data && typeof window !== "undefined") {
+        window.location.replace("/");
+      }
+    },
+  });
+
   return (
     <div className="profile-sections">
       {selected === "info-0" ? (
@@ -23,6 +36,9 @@ export default function ProfileSections({ selected, user }) {
             <span>E-mail:</span>
             {user.profile.email}
           </h4>
+          <a onClick={() => logout()} href="#" className="btn btn__inverted">
+            Logout
+          </a>
         </Col>
       ) : selected === "info-1" ? (
         <Col xs={12} className="profile-sections__info-1">

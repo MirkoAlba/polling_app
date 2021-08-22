@@ -164,24 +164,24 @@ export const userResolver = {
 
       return token;
     },
-  },
 
-  async Logout(_, __, context) {
-    if (context.res) {
-      context.res.setHeader(
-        "Set-Cookie",
-        cookie.serialize("jid", "", {
-          httpOnly: true,
-          // domain: ".example.com",
-          secure: process.env.NODE_ENV !== "development",
-          maxAge: 1,
-          sameSite: "strict",
-          path: "/",
-        })
-      );
-      return true;
-    } else {
-      return false;
-    }
+    async Logout(_, __, context) {
+      if (context.res) {
+        context.res.setHeader(
+          "Set-Cookie",
+          cookie.serialize("jid", "", {
+            httpOnly: true,
+            // domain: ".example.com",
+            secure: process.env.NODE_ENV !== "development",
+            maxAge: 1,
+            sameSite: "strict",
+            path: "/",
+          })
+        );
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
 };

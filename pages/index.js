@@ -1,14 +1,22 @@
 import Hero from "../components/home/hero";
 import CategoryCard from "../components/home/category-card";
-import { Fragment, useRef } from "react";
+import { Fragment, useEffect, useRef } from "react";
 
 import { createPrismaClient } from "../apollo/server/db/context";
+
+import { useStoreActions } from "easy-peasy";
 
 export default function Home({ userId, viewportWidth, categories }) {
   const myRef = useRef(null);
   const executeScroll = () => {
     myRef.current.scrollIntoView({ behavior: "smooth" });
   };
+
+  const fetchProducts = useStoreActions((actions) => actions.fetchProducts);
+  useEffect(() => {
+    fetchProducts();
+  });
+
   return (
     <Fragment>
       <Hero

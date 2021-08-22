@@ -6,7 +6,7 @@ export default function Hero({ userId, viewportWidth, myRef, executeScroll }) {
       <div className="hero__container d-flex flex-column justify-content-around align-items-center">
         <h1 className="title">Ordina e guadagna punti!</h1>
         <div className="d-flex flex-column">
-          <Link href="/register">
+          <Link href={userId ? "/prodotti/pizze" : "/register"}>
             <a className="btn btn__inverted mb-2 mb-md-4">Ordina ora</a>
           </Link>
 

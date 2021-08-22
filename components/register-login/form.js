@@ -3,14 +3,12 @@ import { Fragment, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { REGISTER_MUTATION, LOGIN_MUTATION } from "../../graphql/mutations";
 import { setAccessToken } from "../../apollo/client/accessToken";
-import { useRouter } from "next/router";
-import Image from "next/image";
+// import { useRouter } from "next/router";
+// import Image from "next/image";
 
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 
 export default function RegisterLoginForm() {
-  const router = useRouter();
-
   const [showForm, setShowForm] = useState(false);
 
   const [errors, setErrors] = useState({});
@@ -34,8 +32,9 @@ export default function RegisterLoginForm() {
     onCompleted: (data) => {
       // setto token ritornato dalla login mutation
       setAccessToken(data.Login);
-      // router.push("/");
-      router.reload();
+      if (typeof window !== "undefined") {
+        window.location.replace("/");
+      }
     },
     onError: (err) => {
       if (err) {

@@ -27,7 +27,7 @@ export async function getServerSideProps({ req, res }) {
     });
   }
 
-  var verificato = data?.data?.VerifyToken.verified;
+  var verificato = data?.data?.VerifyToken?.verified;
 
   if (!verificato) {
     return {

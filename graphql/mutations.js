@@ -11,3 +11,9 @@ export const LOGIN_MUTATION = gql`
     Login(email: $userEmail, password: $userPassword)
   }
 `;
+
+export const LOGOUT = gql`
+  mutation logout {
+    Logout
+  }
+`;
