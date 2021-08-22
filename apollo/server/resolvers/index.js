@@ -3,6 +3,8 @@ import { productResolver } from "./product-resolver";
 import { GraphQLScalarType, Kind } from "graphql";
 import { UserInputError } from "apollo-server-micro";
 
+import { format } from "date-fns";
+
 export const resolvers = {
   Query: {
     ...userResolver.Query,
@@ -77,9 +79,28 @@ export const resolvers = {
     },
     parseLiteral(ast) {
       if (ast.kind === Kind.INT) {
-        return ast.value;
+        return parseInt(ast.value);
+        // return ast.value;
       }
       throw new UserInputError("Provided value is not an integer");
+    },
+  }),
+
+  Date: new GraphQLScalarType({
+    name: "Date",
+    description: "Date scalar type",
+    parseValue(value) {
+      return new Date(value); // value from the client
+    },
+    serialize(value) {
+      const date = format(value, "dd/MM/yyyy");
+      return date; // value sent to the client
+    },
+    parseLiteral(ast) {
+      if (ast.kind === Kind.INT) {
+        return parseInt(ast.value, 10); // ast value is always in string format
+      }
+      return null;
     },
   }),
 };

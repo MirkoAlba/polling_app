@@ -10,6 +10,7 @@ export const typeDefs = gql`
 
   # ---------- Scalar Types ----------
   scalar BigInt
+  scalar Date
 
   # ---------- User Types ----------
   type User {
@@ -29,7 +30,7 @@ export const typeDefs = gql`
     confirmPassword: String!
     isAdmin: Boolean!
 
-    createdAt: String
+    createdAt: Date!
 
     # relation User
     user: User! #campo deve essere uguale a quello nei top-level resolver

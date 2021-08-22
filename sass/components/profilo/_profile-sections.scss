@@ -1,0 +1,19 @@
+.profile-sections {
+  &__info-0 {
+    &__data {
+      span {
+        color: $primary;
+      }
+
+      @include media-breakpoint-down(sm) {
+        font-size: 0.85rem;
+      }
+    }
+  }
+
+  &__info-1 {
+  }
+
+  &__info-2 {
+  }
+}

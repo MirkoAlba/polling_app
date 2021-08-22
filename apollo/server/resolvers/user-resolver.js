@@ -25,18 +25,17 @@ export const userResolver = {
         token,
         process.env.TOKEN_SECRET_KEY,
         function (err, decoded) {
-          if (err) {
-            return {
-              message: `Token non valido: ${err.message}`,
-              verified: false,
-            };
-          } else {
-            return {
-              message: "Verificato",
-              verified: true,
-              userId: decoded.profileId,
-            };
-          }
+          return err
+            ? {
+                message: `Token non valido: ${err.message}`,
+                verified: false,
+                userId: "",
+              }
+            : {
+                message: "Verificato",
+                verified: true,
+                userId: decoded.profileId,
+              };
         }
       );
 
@@ -157,7 +156,7 @@ export const userResolver = {
           httpOnly: true,
           // domain: ".example.com",
           secure: process.env.NODE_ENV !== "development",
-          maxAge: 60 * 60,
+          maxAge: 6 * 60 * 60 * 1000,
           sameSite: "strict",
           path: "/",
         })

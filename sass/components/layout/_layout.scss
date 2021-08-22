@@ -57,6 +57,10 @@
 
     .nav-link {
       color: $primary;
+
+      @include media-breakpoint-down(sm) {
+        padding-left: 12px;
+      }
     }
 
     .navbar-toggler {
