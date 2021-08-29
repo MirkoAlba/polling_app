@@ -24,10 +24,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/register": [
+    "/carrello": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/register.js"
+      "static/chunks/pages/carrello.js"
+    ],
+    "/prodotti/[categoryName]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/prodotti/[categoryName].js"
     ]
   },
   "ampFirstPages": []

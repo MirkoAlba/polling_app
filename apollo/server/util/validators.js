@@ -1,7 +1,7 @@
 const regExEmail =
   /^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$/;
 const regExPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-var regExPhoneNumber = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
+var regExPhoneNumber = /^((3[1-6][0-9]))(\d{7})$/;
 
 export function validateRegisterInput(
   firstName,
@@ -18,7 +18,7 @@ export function validateRegisterInput(
   }
 
   if (firstName.trim().length > 20) {
-    errors.username = "Nome non deve superare i 20 caratteri!";
+    errors.firstName = "Nome non deve superare i 20 caratteri!";
   }
 
   if (lastName.trim() === "") {
@@ -26,14 +26,14 @@ export function validateRegisterInput(
   }
 
   if (lastName.trim().length > 35) {
-    errors.username = "Cognome non deve superare i 35 caratteri!";
+    errors.lastName = "Cognome non deve superare i 35 caratteri!";
   }
 
-  if (!cellNumber) {
+  if (cellNumber.trim() === "") {
     errors.cellNumber = "Numero di telefono non deve essere vuoto!";
   } else {
-    if (cellNumber.toString().trim().length !== 10) {
-      errors.cellNumber = "Numero di telefono deve essere di 10 cifre";
+    if (!cellNumber.match(regExPhoneNumber)) {
+      errors.cellNumber = "Inserisci un numero valido!";
     }
   }
 
@@ -72,18 +72,18 @@ export function validateLoginInput(userEmail, userPassword) {
   const errors = {};
 
   if (userPassword.trim() === "") {
-    errors.userPassword = "Password non deve essere vuota!";
+    errors.password = "Password non deve essere vuota!";
   }
 
   if (userEmail.trim() === "") {
-    errors.userEmail = "Email non deve essere vuota!";
+    errors.email = "Email non deve essere vuota!";
   } else {
     if (userEmail.trim().length > 50) {
-      errors.userEmail = "Email non deve superare i 50 caratteri!";
+      errors.email = "Email non deve superare i 50 caratteri!";
     }
 
     if (!userEmail.match(regExEmail)) {
-      errors.userEmail = "Email deve essere valida!";
+      errors.email = "Email deve essere valida!";
     }
   }
 

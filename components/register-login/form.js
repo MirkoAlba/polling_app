@@ -27,14 +27,15 @@ export default function RegisterLoginForm() {
   const [userPassword, setUserPassword] = useState("");
 
   // register input
-  const [registerInput, setRegisterInput] = useState({
+  const initialRegisterState = {
     firstName: "",
     lastName: "",
-    cellNumber: 0,
+    cellNumber: "",
     email: "",
     password: "",
     confirmPassword: "",
-  });
+  };
+  const [registerInput, setRegisterInput] = useState(initialRegisterState);
 
   const [login] = useMutation(LOGIN_MUTATION, {
     variables: { userEmail, userPassword },
@@ -72,16 +73,9 @@ export default function RegisterLoginForm() {
 
   const handleShowForm = () => {
     setShowForm(!showForm);
+    setRegisterInput(initialRegisterState);
     setErrors({});
   };
-
-  function removeSpace(e) {
-    var s = e.target.value.replace(/ /g, "");
-    setRegisterInput({
-      ...registerInput,
-      cellNumber: parseInt(s),
-    });
-  }
 
   return (
     <Container>
@@ -117,16 +111,17 @@ export default function RegisterLoginForm() {
                         className="form-input"
                         type="text"
                         placeholder="Inserisci il tuo Nome"
+                        value={registerInput.firstName}
                         onChange={(e) =>
                           setRegisterInput({
                             ...registerInput,
                             firstName: e.target.value,
                           })
                         }
-                        isInvalid={errors.firstName ? true : false}
+                        isInvalid={errors?.firstName ? true : false}
                       />
                       <Form.Control.Feedback type="invalid">
-                        {errors.firstName}
+                        {errors?.firstName}
                       </Form.Control.Feedback>
                     </div>
 
@@ -136,16 +131,17 @@ export default function RegisterLoginForm() {
                         className="form-input"
                         type="text"
                         placeholder="Inserisci il tuo Cognome"
+                        value={registerInput.lastName}
                         onChange={(e) =>
                           setRegisterInput({
                             ...registerInput,
                             lastName: e.target.value,
                           })
                         }
-                        isInvalid={errors.lastName ? true : false}
+                        isInvalid={errors?.lastName ? true : false}
                       />
                       <Form.Control.Feedback type="invalid">
-                        {errors.lastName}
+                        {errors?.lastName}
                       </Form.Control.Feedback>
                     </div>
                   </div>
@@ -156,16 +152,17 @@ export default function RegisterLoginForm() {
                       className="form-input"
                       type="text"
                       placeholder="Inserisci il tuo Cognome"
+                      value={registerInput.lastName}
                       onChange={(e) =>
                         setRegisterInput({
                           ...registerInput,
                           lastName: e.target.value,
                         })
                       }
-                      isInvalid={errors.lastName ? true : false}
+                      isInvalid={errors?.lastName ? true : false}
                     />
                     <Form.Control.Feedback type="invalid">
-                      {errors.lastName}
+                      {errors?.lastName}
                     </Form.Control.Feedback>
                   </div>
 
@@ -179,16 +176,17 @@ export default function RegisterLoginForm() {
                         className="form-input"
                         type="email"
                         placeholder="Inserisci la tua E-mail"
+                        value={registerInput.email}
                         onChange={(e) =>
                           setRegisterInput({
                             ...registerInput,
                             email: e.target.value,
                           })
                         }
-                        isInvalid={errors.email ? true : false}
+                        isInvalid={errors?.email ? true : false}
                       />
                       <Form.Control.Feedback type="invalid">
-                        {errors.email}
+                        {errors?.email}
                       </Form.Control.Feedback>
                     </div>
 
@@ -200,16 +198,17 @@ export default function RegisterLoginForm() {
                         className="form-input"
                         type="text"
                         placeholder="Inserisci il tuo Numero di telefono"
-                        onChange={(e) => {
+                        value={registerInput.cellNumber}
+                        onChange={(e) =>
                           setRegisterInput({
                             ...registerInput,
                             cellNumber: e.target.value,
-                          });
-                        }}
-                        isInvalid={errors.cellNumber ? true : false}
+                          })
+                        }
+                        isInvalid={errors?.cellNumber ? true : false}
                       />
                       <Form.Control.Feedback type="invalid">
-                        {errors.cellNumber}
+                        {errors?.cellNumber}
                       </Form.Control.Feedback>
                     </div>
                   </div>
@@ -222,11 +221,17 @@ export default function RegisterLoginForm() {
                       className="form-input"
                       type="text"
                       placeholder="Inserisci il Numero di telefono"
-                      onChange={(e) => removeSpace(e)}
-                      isInvalid={errors.cellNumber ? true : false}
+                      value={registerInput.cellNumber}
+                      onChange={(e) =>
+                        setRegisterInput({
+                          ...registerInput,
+                          cellNumber: e.target.value,
+                        })
+                      }
+                      isInvalid={errors?.cellNumber ? true : false}
                     />
                     <Form.Control.Feedback type="invalid">
-                      {errors.cellNumber}
+                      {errors?.cellNumber}
                     </Form.Control.Feedback>
                   </div>
 
@@ -254,16 +259,17 @@ export default function RegisterLoginForm() {
                         className="form-input"
                         type={showPassword}
                         placeholder="Inserisci la Password"
+                        value={registerInput.password}
                         onChange={(e) =>
                           setRegisterInput({
                             ...registerInput,
                             password: e.target.value,
                           })
                         }
-                        isInvalid={errors.password ? true : false}
+                        isInvalid={errors?.password ? true : false}
                       />
                       <Form.Control.Feedback type="invalid">
-                        {errors.password}
+                        {errors?.password}
                       </Form.Control.Feedback>
                     </div>
 
@@ -287,16 +293,17 @@ export default function RegisterLoginForm() {
                         className="form-input"
                         type={showPassword}
                         placeholder="Inserisci di nuovo la Password"
+                        value={registerInput.confirmPassword}
                         onChange={(e) =>
                           setRegisterInput({
                             ...registerInput,
                             confirmPassword: e.target.value,
                           })
                         }
-                        isInvalid={errors.confirmPassword ? true : false}
+                        isInvalid={errors?.confirmPassword ? true : false}
                       />
                       <Form.Control.Feedback type="invalid">
-                        {errors.confirmPassword}
+                        {errors?.confirmPassword}
                       </Form.Control.Feedback>
                     </div>
                   </div>
@@ -321,16 +328,17 @@ export default function RegisterLoginForm() {
                       className="form-input"
                       type={showPassword}
                       placeholder="Inserisci di nuovo la Password"
+                      value={registerInput.confirmPassword}
                       onChange={(e) =>
                         setRegisterInput({
                           ...registerInput,
                           confirmPassword: e.target.value,
                         })
                       }
-                      isInvalid={errors.confirmPassword ? true : false}
+                      isInvalid={errors?.confirmPassword ? true : false}
                     />
                     <Form.Control.Feedback type="invalid">
-                      {errors.confirmPassword}
+                      {errors?.confirmPassword}
                     </Form.Control.Feedback>
                   </div>
 
@@ -379,11 +387,12 @@ export default function RegisterLoginForm() {
                       className="form-input"
                       type="email"
                       placeholder="Inserisci la tua E-mail"
+                      value={userEmail}
                       onChange={(e) => setUserEmail(e.target.value)}
-                      isInvalid={errors.userEmail ? true : false}
+                      isInvalid={errors.email ? true : false}
                     />
                     <Form.Control.Feedback type="invalid">
-                      {errors.userEmail}
+                      {errors.email}
                     </Form.Control.Feedback>
                   </div>
 
@@ -407,11 +416,12 @@ export default function RegisterLoginForm() {
                       className="form-input"
                       type={showPassword}
                       placeholder="Inserisci la password"
+                      value={userPassword}
                       onChange={(e) => setUserPassword(e.target.value)}
-                      isInvalid={errors.userPassword ? true : false}
+                      isInvalid={errors.password ? true : false}
                     />
                     <Form.Control.Feedback type="invalid">
-                      {errors.userPassword}
+                      {errors.password}
                     </Form.Control.Feedback>
                   </div>
 

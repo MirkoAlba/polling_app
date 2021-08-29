@@ -10,6 +10,8 @@ import { useRouter } from "next/router";
 
 import { capitalize } from "../../helpers/general";
 
+import { useStoreActions } from "easy-peasy";
+
 export default function Grid({ categoryName, userId }) {
   const router = useRouter();
 
@@ -21,6 +23,10 @@ export default function Grid({ categoryName, userId }) {
     },
     variables: { categoryName },
   });
+
+  const addProductToCart = useStoreActions(
+    (actions) => actions.cart.addProductToCart
+  );
 
   return (
     <Container>
@@ -67,7 +73,10 @@ export default function Grid({ categoryName, userId }) {
                               >
                                 <a className="btn btn__inverted mb-2">Scopri</a>
                               </Link>
-                              <a href="#" className="btn btn__inverted mt-2">
+                              <a
+                                onClick={() => addProductToCart(p)}
+                                className="btn btn__inverted mt-2"
+                              >
                                 Aggiungi
                               </a>
                             </Fragment>

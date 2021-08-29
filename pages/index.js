@@ -7,14 +7,18 @@ import { createPrismaClient } from "../apollo/server/db/context";
 import { useStoreActions } from "easy-peasy";
 
 export default function Home({ userId, viewportWidth, categories }) {
+  const userIdInCart = userId ? userId : "";
+
   const myRef = useRef(null);
   const executeScroll = () => {
     myRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
   const fetchProducts = useStoreActions((actions) => actions.fetchProducts);
+  const setUserIdInCart = useStoreActions((actions) => actions.setUserId);
   useEffect(() => {
     fetchProducts();
+    setUserIdInCart(userIdInCart);
   });
 
   return (

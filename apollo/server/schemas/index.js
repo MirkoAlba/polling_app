@@ -61,7 +61,7 @@ export const typeDefs = gql`
   input RegisterInput {
     firstName: String!
     lastName: String!
-    cellNumber: BigInt!
+    cellNumber: String!
     email: String!
     password: String!
     confirmPassword: String!

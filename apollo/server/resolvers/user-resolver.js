@@ -71,6 +71,9 @@ export const userResolver = {
         throw new UserInputError("Errori", { errors });
       }
 
+      //lo passo string e lo parso int
+      cellNumber = parseInt(cellNumber);
+
       const checkEmail = await context.prisma.profile.findUnique({
         where: {
           email: email,
