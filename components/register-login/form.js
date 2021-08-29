@@ -6,11 +6,20 @@ import { setAccessToken } from "../../apollo/client/accessToken";
 // import { useRouter } from "next/router";
 // import Image from "next/image";
 
+import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
+
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 
 export default function RegisterLoginForm() {
   const [showForm, setShowForm] = useState(false);
+  //handle show password when typing
+  const [showPassword, setShowPassword] = useState("password");
+  const handleShowPassword = () => {
+    if (showPassword === "password") setShowPassword("text");
+    if (showPassword === "text") setShowPassword("password");
+  };
 
+  //custom gql errors
   const [errors, setErrors] = useState({});
 
   // login input
@@ -226,10 +235,24 @@ export default function RegisterLoginForm() {
                     className="my-4 d-flex justify-content-center"
                   >
                     <div className="w-100">
-                      <Form.Label className="form-label">Password</Form.Label>
+                      <Form.Label className="form-label d-flex align-items-center">
+                        Password{" "}
+                        <AiOutlineEye
+                          className={`ms-3 ${
+                            showPassword === "password" ? "d-none" : "d-block"
+                          }`}
+                          onClick={handleShowPassword}
+                        />
+                        <AiOutlineEyeInvisible
+                          className={`ms-3 ${
+                            showPassword === "password" ? "d-block" : "d-none"
+                          }`}
+                          onClick={handleShowPassword}
+                        />
+                      </Form.Label>
                       <Form.Control
                         className="form-input"
-                        type="password"
+                        type={showPassword}
                         placeholder="Inserisci la Password"
                         onChange={(e) =>
                           setRegisterInput({
@@ -245,12 +268,24 @@ export default function RegisterLoginForm() {
                     </div>
 
                     <div className="d-none d-lg-block w-100">
-                      <Form.Label className="form-label">
-                        Conferma Password
+                      <Form.Label className="form-label d-flex align-items-center">
+                        Conferma Password{" "}
+                        <AiOutlineEye
+                          className={`ms-3 ${
+                            showPassword === "password" ? "d-none" : "d-block"
+                          }`}
+                          onClick={handleShowPassword}
+                        />
+                        <AiOutlineEyeInvisible
+                          className={`ms-3 ${
+                            showPassword === "password" ? "d-block" : "d-none"
+                          }`}
+                          onClick={handleShowPassword}
+                        />
                       </Form.Label>
                       <Form.Control
                         className="form-input"
-                        type="password"
+                        type={showPassword}
                         placeholder="Inserisci di nuovo la Password"
                         onChange={(e) =>
                           setRegisterInput({
@@ -267,12 +302,24 @@ export default function RegisterLoginForm() {
                   </div>
 
                   <div className="d-block d-lg-none my-4">
-                    <Form.Label className="form-label">
-                      Conferma Password
+                    <Form.Label className="form-label d-flex align-items-center">
+                      Conferma Password{" "}
+                      <AiOutlineEye
+                        className={`ms-3 ${
+                          showPassword === "password" ? "d-none" : "d-block"
+                        }`}
+                        onClick={handleShowPassword}
+                      />
+                      <AiOutlineEyeInvisible
+                        className={`ms-3 ${
+                          showPassword === "password" ? "d-block" : "d-none"
+                        }`}
+                        onClick={handleShowPassword}
+                      />
                     </Form.Label>
                     <Form.Control
                       className="form-input"
-                      type="password"
+                      type={showPassword}
                       placeholder="Inserisci di nuovo la Password"
                       onChange={(e) =>
                         setRegisterInput({
@@ -316,7 +363,7 @@ export default function RegisterLoginForm() {
               className="d-none d-lg-flex align-items-center p-lg-0 col-right"
             >
               <div className="wrapper__left w-100 d-flex align-items-center">
-                <div>Slider Pizze o logo</div>
+                <div>Slider Pizze o logo login</div>
               </div>
             </Col>
             <Col
@@ -333,24 +380,38 @@ export default function RegisterLoginForm() {
                       type="email"
                       placeholder="Inserisci la tua E-mail"
                       onChange={(e) => setUserEmail(e.target.value)}
-                      isInvalid={errors.email ? true : false}
+                      isInvalid={errors.userEmail ? true : false}
                     />
                     <Form.Control.Feedback type="invalid">
-                      {errors.email}
+                      {errors.userEmail}
                     </Form.Control.Feedback>
                   </div>
 
                   <div className="my-4">
-                    <Form.Label className="form-label">Password</Form.Label>
+                    <Form.Label className="form-label d-flex align-items-center">
+                      Password{" "}
+                      <AiOutlineEye
+                        className={`ms-3 ${
+                          showPassword === "password" ? "d-none" : "d-block"
+                        }`}
+                        onClick={handleShowPassword}
+                      />
+                      <AiOutlineEyeInvisible
+                        className={`ms-3 ${
+                          showPassword === "password" ? "d-block" : "d-none"
+                        }`}
+                        onClick={handleShowPassword}
+                      />
+                    </Form.Label>
                     <Form.Control
                       className="form-input"
-                      type="password"
-                      placeholder="Inserisci la tua E-mail"
+                      type={showPassword}
+                      placeholder="Inserisci la password"
                       onChange={(e) => setUserPassword(e.target.value)}
-                      isInvalid={errors.password ? true : false}
+                      isInvalid={errors.userPassword ? true : false}
                     />
                     <Form.Control.Feedback type="invalid">
-                      {errors.password}
+                      {errors.userPassword}
                     </Form.Control.Feedback>
                   </div>
 

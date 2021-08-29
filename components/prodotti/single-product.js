@@ -57,7 +57,7 @@ export default function SingleProduct({ userId, viewportWidth, product }) {
         {smart && (
           <Col xs={12} className="text-center">
             {userId ? (
-              <a href="#" className="btn btn__inverted">
+              <a href="#" className="btn btn__inverted mt-3">
                 Aggiungi all' ordine
               </a>
             ) : (

@@ -2,8 +2,5 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/api/graphql": "pages/api/graphql.js",
-  "/register": "pages/register.js",
-  "/profilo": "pages/profilo.js",
-  "/": "pages/index.js"
+  "/register": "pages/register.js"
 }

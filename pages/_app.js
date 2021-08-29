@@ -2,7 +2,7 @@ import "../sass/index.scss"; //scss style
 
 import Layout from "../components/layout/layout";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Head from "next/head";
 import useWindowDimensions from "../helpers/checkViewport";
 
