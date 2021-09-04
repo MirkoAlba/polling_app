@@ -26,29 +26,70 @@ model Profile {
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
-  isAdmin   Boolean
-  user      User     @relation(fields: [id], references: [id])
-  userId    String
+  isAdmin   Boolean  @default(false)
+
+  user   User    @relation(fields: [id], references: [id])
+  userId String
+  // 1 profile ha 1 o più ordini
+  orders Order[]
+  //carrello
+  cart   Cart?
 }
 
 model Category {
-  id                String @id @default(cuid())
-  categoryName      String @unique
+  id                String    @id @default(cuid())
+  categoryName      String    @unique
   categoryPathImage String
-  categoryOrder     Int    @default(1)
-
+  categoryOrder     Int       @default(1)
   // una categoria ha 1 o molti prodotti
-  products Product[]
+  products          Product[]
 }
 
 model Product {
-  id                 String @id @default(cuid())
-  productName        String @unique
+  id                 String      @id @default(cuid())
+  productName        String      @unique
   productDescription String
   productCost        Float
-  productImagePath   String @default(dbgenerated("path"))
-
+  productImagePath   String      @default(dbgenerated("path"))
   //relazione: molti prodotti appartengono ad una determinata categoria
-  category   Category @relation(fields: [categoryId], references: [id])
-  categoryId String
+  category           Category    @relation(fields: [categoryId], references: [id])
+  categoryId         String
+  // 1 prodotto può essere 1 o più OrderItem
+  orderItems         OrderItem[]
+}
+
+model Order {
+  id         String      @id @default(cuid())
+  total      Float
+  createdAt  DateTime    @default(now())
+  state      String      @default(dbgenerated("Ricevuto"))
+  // 1 o più ordini appartengono ad un profile
+  profileId  String
+  profile    Profile     @relation(fields: [profileId], references: [id])
+  // 1 Order ha 1 o più OrderItems
+  orderItems OrderItem[]
+}
+
+model OrderItem {
+  id          String  @id @default(cuid())
+  quantity    Int
+  productCost Float   @default(0)
+  // ogni OrderItem è associato ad un prodotto
+  productId   String
+  product     Product @relation(fields: [productId], references: [id])
+  // più orderItem appartengono ad un Order
+  orderId     String?
+  order       Order?  @relation(fields: [orderId], references: [id])
+  //carrello associato, gli orderItem appartengono ad un carrello
+  cartId      String?
+  cart        Cart?   @relation(fields: [cartId], references: [id])
+}
+
+model Cart {
+  id         String      @id @default(cuid())
+  // profilo associato al carrello
+  profileId  String
+  profile    Profile     @relation(fields: [profileId], references: [id])
+  // 1 cart ha più orderItem
+  orderItems OrderItem[]
 }

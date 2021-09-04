@@ -150,7 +150,7 @@ export const userResolver = {
           profileId: profile.id,
         },
         process.env.TOKEN_SECRET_KEY,
-        { expiresIn: "1h" }
+        { expiresIn: "2h" }
       );
 
       context.res.setHeader(

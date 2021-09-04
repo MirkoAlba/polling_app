@@ -1,6 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_PRODUCTS_BY_CATEGORY } from "../../graphql/queries";
 
@@ -10,13 +10,12 @@ import { useRouter } from "next/router";
 
 import { capitalize } from "../../helpers/general";
 
-import { useStoreActions } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
 
 export default function Grid({ categoryName, userId }) {
   const router = useRouter();
 
   const [products, setProducts] = useState([]);
-
   const { loading, _data, error } = useQuery(GET_PRODUCTS_BY_CATEGORY, {
     onCompleted: (d) => {
       setProducts(d.GetProductsByCategory);
@@ -24,8 +23,13 @@ export default function Grid({ categoryName, userId }) {
     variables: { categoryName },
   });
 
+  const { productsInCart } = useStoreState((state) => state.cart);
+  // console.log(productsInCart);
   const addProductToCart = useStoreActions(
     (actions) => actions.cart.addProductToCart
+  );
+  const removeProduct = useStoreActions(
+    (actions) => actions.cart.removeProduct
   );
 
   return (
@@ -73,12 +77,21 @@ export default function Grid({ categoryName, userId }) {
                               >
                                 <a className="btn btn__inverted mb-2">Scopri</a>
                               </Link>
-                              <a
-                                onClick={() => addProductToCart(p)}
-                                className="btn btn__inverted mt-2"
-                              >
-                                Aggiungi
-                              </a>
+                              {productsInCart.includes(p.id) ? (
+                                <a
+                                  onClick={() => removeProduct(p.id)}
+                                  className="btn btn__remove mt-2"
+                                >
+                                  Rimuovi
+                                </a>
+                              ) : (
+                                <a
+                                  onClick={() => addProductToCart(p.id)}
+                                  className="btn btn__add mt-2"
+                                >
+                                  Aggiungi
+                                </a>
+                              )}
                             </Fragment>
                           ) : (
                             <Link

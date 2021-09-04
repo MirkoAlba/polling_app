@@ -1,5 +1,7 @@
 import { userResolver } from "./user-resolver";
 import { productResolver } from "./product-resolver";
+import { orderResolver } from "./order-resolver";
+import { cartResolver } from "./cart-resolver";
 import { GraphQLScalarType, Kind } from "graphql";
 import { UserInputError } from "apollo-server-micro";
 
@@ -9,11 +11,15 @@ export const resolvers = {
   Query: {
     ...userResolver.Query,
     ...productResolver.Query,
+    ...orderResolver.Query,
+    ...cartResolver.Query,
   },
 
   Mutation: {
     ...userResolver.Mutation,
     ...productResolver.Mutation,
+    ...orderResolver.Mutation,
+    ...cartResolver.Mutation,
   },
 
   //---------- Top-level resolvers ----------
@@ -59,8 +65,72 @@ export const resolvers = {
       const c = await context?.prisma?.category.findFirst({
         where: { id: parent.categoryId },
       });
-      console.log(c);
       return c;
+    },
+  },
+
+  OrderItem: {
+    product: async (parent, _, context) => {
+      const p = await context.prisma.product.findFirst({
+        where: {
+          id: parent.productId,
+        },
+      });
+
+      return p;
+    },
+    order: async (parent, _, context) => {
+      const o = await context.prisma.order.findUnique({
+        where: {
+          id: parent.orderId,
+        },
+      });
+
+      return o;
+    },
+  },
+
+  Order: {
+    profile: async (parent, _, context) => {
+      const user = await context.prisma.profile.findUnique({
+        where: {
+          id: parent.profileId,
+        },
+      });
+
+      return user;
+    },
+
+    orderItems: async (parent, _, context) => {
+      const orderItems = await context.prisma.orderItem.findMany({
+        where: {
+          orderId: parent.id,
+        },
+      });
+
+      return orderItems;
+    },
+  },
+
+  Cart: {
+    profile: async (parent, _, context) => {
+      const user = await context.prisma.profile.findUnique({
+        where: {
+          id: context.userId,
+        },
+      });
+
+      return user;
+    },
+
+    orderItems: async (parent, _, context) => {
+      const orderItems = await context.prisma.orderItem.findMany({
+        where: {
+          cartId: parent.id,
+        },
+      });
+
+      return orderItems;
     },
   },
   //---------- End Top-level resolvers ----------

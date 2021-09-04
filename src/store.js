@@ -12,17 +12,12 @@ export const store = createStore(
 
       addProductToCart: action((state, payload) => {
         state.productsInCart.push(payload);
-        // state.productsInCart.map(product => {
-        //   if(product.id !== payload.id) {
-        //     state.productsInCart.push(payload);
-        //   } else {
-        //     product.quantity =
-        //   }
-        // })
       }),
-      // removeProduct: action((state, payload) => {
-      //   state.productsInCart.push(payload);
-      // }),
+      removeProduct: action((state, payload) => {
+        state.productsInCart = state.productsInCart.filter((product) => {
+          return product !== payload;
+        });
+      }),
     },
 
     fetchProducts: thunk(async (actions) => {

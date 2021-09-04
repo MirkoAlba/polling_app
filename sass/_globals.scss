@@ -48,4 +48,22 @@ body {
       border-color: $primary;
     }
   }
+
+  &__add {
+    border-color: $green !important;
+    background: $green;
+    color: $white;
+
+    &:hover {
+      border-color: $green !important;
+      background: $white;
+      color: $green;
+    }
+  }
+
+  &__remove {
+    border-color: $primary !important;
+    background: $primary;
+    color: $white;
+  }
 }

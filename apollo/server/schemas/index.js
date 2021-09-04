@@ -35,6 +35,9 @@ export const typeDefs = gql`
     # relation User
     user: User! #campo deve essere uguale a quello nei top-level resolver
     userId: ID!
+
+    # cart
+    cart: Cart
   }
 
   # ---------- Products Types ----------
@@ -51,13 +54,56 @@ export const typeDefs = gql`
     productDescription: String!
     productCost: Float!
     productImagePath: String!
+
     # category relationship
     category: Category! #field level resolver
     categoryId: ID!
   }
 
-  # ---------- Inputs ----------
+  # ---------- Order Types ----------
+  type Order {
+    id: ID!
+    total: Float!
+    createdAt: String!
+    state: String!
 
+    #profile relation
+    profile: Profile!
+    profileId: ID!
+
+    # OrderItem relationship
+    orderItems: [OrderItem]!
+  }
+
+  type OrderItem {
+    id: ID!
+    quantity: Int!
+    productCost: Float!
+
+    # product relationship
+    product: Product
+    productId: ID!
+
+    # order relationship
+    order: Order
+    orderId: ID
+
+    # cart
+    cart: Cart
+  }
+
+  # ---------- Cart Types ----------
+  type Cart {
+    id: ID!
+
+    # profile ref
+    profile: Profile
+
+    # orderItems
+    orderItems: [OrderItem]
+  }
+
+  # ---------- Inputs ----------
   input RegisterInput {
     firstName: String!
     lastName: String!
@@ -65,6 +111,22 @@ export const typeDefs = gql`
     email: String!
     password: String!
     confirmPassword: String!
+  }
+
+  input CreateOrderInput {
+    userId: ID!
+    total: Float!
+    orderItems: [OrderItemInput]!
+  }
+
+  input OrderItemInput {
+    quantity: Int!
+    productCost: Float!
+    productId: ID!
+  }
+
+  input CreateCartInput {
+    orderItems: [OrderItemInput]
   }
 
   # ---------- Operations ----------
@@ -79,6 +141,9 @@ export const typeDefs = gql`
     GetCategory(categoryName: String!): String!
     GetAllProducts: [Product]!
     GetProductsByCategory(categoryName: String!): [Product]
+
+    # Cart
+    GetCurrentUserCart: Cart
   }
 
   type Mutation {
@@ -86,5 +151,11 @@ export const typeDefs = gql`
     Register(registerInput: RegisterInput!): String!
     Login(email: String!, password: String!): String!
     Logout: Boolean!
+
+    # Order
+    CreateOrder(createOrderInput: CreateOrderInput!): Order
+
+    # Cart
+    CreateCart(createCartInput: CreateCartInput): Cart!
   }
 `;

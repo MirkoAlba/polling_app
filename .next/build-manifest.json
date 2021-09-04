@@ -24,11 +24,6 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/carrello": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/carrello.js"
-    ],
     "/prodotti/[categoryName]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
