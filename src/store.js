@@ -1,28 +1,35 @@
 import { createStore, persist, action, thunk } from "easy-peasy";
 
 import { queryClient } from "../helpers/query-client";
-import { GET_ALL_PRODUCTS } from "../graphql/queries";
+import { GET_CURRENT_USER_CART } from "../graphql/queries";
 
 export const store = createStore(
   persist({
-    products: [],
     cart: {
       userId: "",
-      productsInCart: [],
+      orderItems: [],
 
       addProductToCart: action((state, payload) => {
-        state.productsInCart.push(payload);
+        state.orderItems.push({
+          quantity: 1,
+          productCost: payload.productCost,
+          product: {
+            id: payload.id,
+            productName: payload.productName,
+          },
+        });
       }),
+
       removeProduct: action((state, payload) => {
-        state.productsInCart = state.productsInCart.filter((product) => {
-          return product !== payload;
+        state.orderItems = state.orderItems.filter((orderItem) => {
+          return orderItem.product.id !== payload;
         });
       }),
     },
 
     fetchProducts: thunk(async (actions) => {
-      const data = await queryClient({ query: GET_ALL_PRODUCTS });
-      actions.setProducts(data?.data?.GetAllProducts);
+      const { data } = await queryClient({ query: GET_CURRENT_USER_CART });
+      actions.setProducts(data?.GetCurrentUserCart);
     }),
 
     setUserId: action((state, payload) => {
@@ -30,7 +37,7 @@ export const store = createStore(
     }),
 
     setProducts: action((state, payload) => {
-      state.products = payload;
+      state.cart.orderItems = payload.orderItems;
     }),
   })
 );

@@ -141,6 +141,7 @@ export const typeDefs = gql`
     GetCategory(categoryName: String!): String!
     GetAllProducts: [Product]!
     GetProductsByCategory(categoryName: String!): [Product]
+    GetProductById(id: ID!): Product!
 
     # Cart
     GetCurrentUserCart: Cart
@@ -157,5 +158,6 @@ export const typeDefs = gql`
 
     # Cart
     CreateCart(createCartInput: CreateCartInput): Cart!
+    UpdateCart(orderItems: [OrderItemInput!]!): Cart!
   }
 `;

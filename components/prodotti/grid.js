@@ -23,8 +23,10 @@ export default function Grid({ categoryName, userId }) {
     variables: { categoryName },
   });
 
-  const { productsInCart } = useStoreState((state) => state.cart);
-  // console.log(productsInCart);
+  const cart = useStoreState((state) => state.cart);
+  console.log(cart);
+  // console.log(cart.orderItems[0].product.id);
+
   const addProductToCart = useStoreActions(
     (actions) => actions.cart.addProductToCart
   );
@@ -77,7 +79,9 @@ export default function Grid({ categoryName, userId }) {
                               >
                                 <a className="btn btn__inverted mb-2">Scopri</a>
                               </Link>
-                              {productsInCart.includes(p.id) ? (
+                              {cart.orderItems.filter(
+                                (e) => e.product.id === p.id
+                              ).length > 0 ? (
                                 <a
                                   onClick={() => removeProduct(p.id)}
                                   className="btn btn__remove mt-2"
@@ -86,7 +90,7 @@ export default function Grid({ categoryName, userId }) {
                                 </a>
                               ) : (
                                 <a
-                                  onClick={() => addProductToCart(p.id)}
+                                  onClick={() => addProductToCart(p)}
                                   className="btn btn__add mt-2"
                                 >
                                   Aggiungi

@@ -7,7 +7,7 @@ import { LOGOUT } from "../../graphql/mutations";
 
 export default function ProfileSections({ selected, user }) {
   // const router = useRouter();
-  const [logout] = useMutation(LOGOUT, {
+  const [logout, { client }] = useMutation(LOGOUT, {
     onCompleted: (data) => {
       if (data && typeof window !== "undefined") {
         window.location.replace("/");
@@ -36,7 +36,11 @@ export default function ProfileSections({ selected, user }) {
             <span>E-mail:</span>
             {user.profile.email}
           </h4>
-          <a onClick={() => logout()} href="#" className="btn btn__inverted">
+          <a
+            onClick={() => logout().then(() => client.resetStore())}
+            href="#"
+            className="btn btn__inverted"
+          >
             Logout
           </a>
         </Col>

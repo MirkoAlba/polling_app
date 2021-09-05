@@ -4,7 +4,7 @@ import { Fragment, useEffect, useRef } from "react";
 
 import { createPrismaClient } from "../apollo/server/db/context";
 
-import { useStoreActions } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
 
 export default function Home({ userId, viewportWidth, categories }) {
   const userIdInCart = userId ? userId : "";
@@ -16,10 +16,11 @@ export default function Home({ userId, viewportWidth, categories }) {
 
   const fetchProducts = useStoreActions((actions) => actions.fetchProducts);
   const setUserIdInCart = useStoreActions((actions) => actions.setUserId);
+  const cart = useStoreState((state) => state.cart);
+  console.log(cart);
   useEffect(() => {
-    fetchProducts();
-    setUserIdInCart(userIdInCart);
-  });
+    userId && (fetchProducts(), setUserIdInCart(userIdInCart));
+  }, []);
 
   return (
     <Fragment>

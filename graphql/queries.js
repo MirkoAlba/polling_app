@@ -52,3 +52,40 @@ export const GET_PRODUCTS_BY_CATEGORY = gql`
     }
   }
 `;
+
+export const GET_PRODUCT_BY_ID = gql`
+  query GetProductById($id: ID!) {
+    GetProductById(id: $id) {
+      id
+      productName
+      productCost
+    }
+  }
+`;
+
+export const GET_CURRENT_USER_CART = gql`
+  query GetCurrentUserCart {
+    GetCurrentUserCart {
+      id
+      # profile {
+      #   id
+      #   email
+
+      #   user {
+      #     firstName
+      #     lastName
+      #   }
+      # }
+
+      orderItems {
+        quantity
+        productCost
+
+        product {
+          id
+          productName
+        }
+      }
+    }
+  }
+`;

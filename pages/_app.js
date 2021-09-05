@@ -17,12 +17,13 @@ import { setAccessToken } from "../apollo/client/accessToken";
 import { StoreProvider } from "easy-peasy";
 import { store } from "../src/store";
 
-function MyApp({ Component, pageProps, tokenResponse }) {
+function MyApp({ Component, pageProps, tokenResponse, token }) {
   const [userId] = useState(tokenResponse?.userId);
   const { width, height } = useWindowDimensions();
 
-  //serve per patchare le proprietà che non vanno su alcuni browser (scrollIntoView safari)
+  setAccessToken(token); //setto il token per averlo a disposizione nei resolver tramite context
 
+  //serve per patchare le proprietà che non vanno su alcuni browser (scrollIntoView safari)
   return (
     <StoreProvider store={store}>
       <AuthProvider>
@@ -57,7 +58,6 @@ MyApp.getInitialProps = async (appContext) => {
   }
 
   var token = tokenInCookie ? tokenInCookie.jid : "tokenfasullo"; //estraggo token dal cookie
-  setAccessToken(token); //setto il token per averlo a disposizione nei resolver tramite context
   var data;
   //verifico token facendo query all API
   if (token) {
@@ -78,7 +78,7 @@ MyApp.getInitialProps = async (appContext) => {
   const tokenResponse = data?.data?.VerifyToken;
 
   // ritorno oggetto verificato nelle props
-  return { ...appProps, tokenResponse };
+  return { ...appProps, tokenResponse, token };
 };
 
 export default MyApp;

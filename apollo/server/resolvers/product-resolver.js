@@ -1,8 +1,7 @@
 export const productResolver = {
   Query: {
     async GetAllCategories(_, __, context) {
-      const categories = await context?.prisma?.category.findMany();
-      return categories;
+      return await context?.prisma?.category.findMany();
     },
 
     async GetCategory(_, { categoryName }, context) {
@@ -16,20 +15,25 @@ export const productResolver = {
     },
 
     async GetAllProducts(_, __, context) {
-      const products = await context?.prisma?.product.findMany();
-      return products;
+      return await context?.prisma?.product.findMany();
     },
 
     async GetProductsByCategory(_, { categoryName }, context) {
-      const products = await context?.prisma?.product.findMany({
+      return await context?.prisma?.product.findMany({
         where: {
           category: {
             categoryName,
           },
         },
       });
+    },
 
-      return products;
+    async GetProductById(_, { id }, context) {
+      return await context?.prisma?.product.findUnique({
+        where: {
+          id,
+        },
+      });
     },
   },
 

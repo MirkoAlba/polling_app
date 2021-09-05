@@ -38,11 +38,9 @@ export function getStandaloneApolloClient() {
 
   // const authLink = new ApolloLink((operation, next) => {
   //   // prendo il token
-  //   // token = getAccessToken();
+  //   var token = getAccessToken();
 
-  //   token = operation.variables.token;
-
-  //   console.log(operation);
+  //   // token = operation.variables.token;
 
   //   operation.setContext((context) => ({
   //     ...context,
@@ -78,8 +76,9 @@ export function getStandaloneApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === "undefined",
     link: ApolloLink.from([errorLink, authLink.concat(httpLink)]),
-    // link: ApolloLink.from([errorLink.concat(httpLink)]),
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+      addTypename: false,
+    }),
   });
 }
 
