@@ -14,13 +14,13 @@ export default function Home({ userId, viewportWidth, categories }) {
     myRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
-  const fetchProducts = useStoreActions((actions) => actions.fetchProducts);
+  const fetchCartItems = useStoreActions((actions) => actions.fetchCartItems);
   const setUserIdInCart = useStoreActions((actions) => actions.setUserId);
   const cart = useStoreState((state) => state.cart);
   console.log(cart);
 
   useEffect(() => {
-    userId && (fetchProducts(), setUserIdInCart(userIdInCart));
+    userId && (fetchCartItems(), setUserIdInCart(userIdInCart));
   }, []);
 
   return (

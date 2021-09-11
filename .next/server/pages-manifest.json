@@ -3,7 +3,6 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/prodotti/[categoryName]/[productName]": "pages/prodotti/[categoryName]/[productName].js",
-  "/api/graphql": "pages/api/graphql.js",
   "/carrello": "pages/carrello.js",
-  "/prodotti/[categoryName]": "pages/prodotti/[categoryName].js"
+  "/api/graphql": "pages/api/graphql.js"
 }

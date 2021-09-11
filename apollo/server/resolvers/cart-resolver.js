@@ -4,7 +4,8 @@ export const cartResolver = {
   Query: {
     async GetCurrentUserCart(_, __, context) {
       if (!context.userId) {
-        throw new AuthenticationError("Non Autenticato");
+        // throw new AuthenticationError("Non Autenticato");
+        console.log("cartResolver non autenticato");
       }
 
       return await context.prisma.cart.findFirst({

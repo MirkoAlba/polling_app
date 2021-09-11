@@ -1,6 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 
 import { useMutation } from "@apollo/client";
 import { UPSERT_CART } from "../../graphql/mutations";
@@ -16,7 +16,8 @@ export default function SingleProduct({ userId, viewportWidth, product }) {
   const smart = viewportWidth < breakpoint.sm;
   const desk = viewportWidth > breakpoint.sm;
 
-  const fetchProducts = useStoreActions((actions) => actions.fetchProducts);
+  //store
+  const fetchCartItems = useStoreActions((actions) => actions.fetchCartItems);
   const cart = useStoreState((state) => state.cart);
   const addProductToCart = useStoreActions(
     (actions) => actions.cart.addProductToCart
@@ -24,9 +25,13 @@ export default function SingleProduct({ userId, viewportWidth, product }) {
   const removeProduct = useStoreActions(
     (actions) => actions.cart.removeProduct
   );
+  const addQuantity = useStoreActions((actions) => actions.cart.addQuantity);
+  const removeQuantity = useStoreActions(
+    (actions) => actions.cart.removeQuantity
+  );
 
   useEffect(() => {
-    userId && fetchProducts();
+    userId && fetchCartItems();
   }, []);
 
   //upsert cart
@@ -35,6 +40,13 @@ export default function SingleProduct({ userId, viewportWidth, product }) {
       createCartInput: { cartItems: cart.cartItems },
     },
   });
+
+  console.log("single: ", cart);
+
+  const getCurrentProductQuantity = (cartItems, id) => {
+    const p = cartItems.filter((item) => item.productId === id);
+    return p[0].quantity;
+  };
 
   return (
     <Container className="single-product">
@@ -69,29 +81,51 @@ export default function SingleProduct({ userId, viewportWidth, product }) {
           </p>
           {desk &&
             (userId ? (
-              cart.cartItems.filter((p) => p.productId === product.id).length >
+              cart.cartItems?.filter((p) => p.productId === product.id).length >
               0 ? (
-                <a
-                  onClick={async () => {
-                    removeProduct(productt.id);
-                    await timeout(1);
-                    upsertCart();
-                  }}
-                  className="btn btn__remove mt-3"
-                >
-                  Rimuovi dall' ordine
-                </a>
+                <Fragment>
+                  <div
+                    style={{ gap: "15px" }}
+                    className="d-flex align-items-center justify-content-center mt-4"
+                  >
+                    <p onClick={() => addQuantity(product.id)}>+</p>
+                    <p>
+                      {getCurrentProductQuantity(cart.cartItems, product.id)}
+                    </p>
+                    <p onClick={() => removeQuantity(product.id)}>-</p>
+                  </div>
+                  <a
+                    onClick={async () => {
+                      removeProduct(product.id);
+                      await timeout(1);
+                      upsertCart();
+                    }}
+                    className="btn btn__remove mt-3"
+                  >
+                    Rimuovi dall' ordine
+                  </a>
+                </Fragment>
               ) : (
-                <a
-                  onClick={async () => {
-                    addProductToCart(product);
-                    await timeout(1);
-                    upsertCart();
-                  }}
-                  className="btn btn__add mt-3"
-                >
-                  Aggiungi all' ordine
-                </a>
+                <Fragment>
+                  <div
+                    style={{ gap: "15px" }}
+                    className="d-flex align-items-center justify-content-center mt-4"
+                  >
+                    <p>ciao</p>
+                    <p>0</p>
+                    <p>ciao</p>
+                  </div>
+                  <a
+                    onClick={async () => {
+                      addProductToCart(product);
+                      await timeout(1);
+                      upsertCart();
+                    }}
+                    className="btn btn__add mt-3"
+                  >
+                    Aggiungi all' ordine
+                  </a>
+                </Fragment>
               )
             ) : (
               <Link href="/register">

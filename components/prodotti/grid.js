@@ -18,7 +18,7 @@ export default function Grid({ categoryName, userId }) {
 
   //store
   const cart = useStoreState((state) => state.cart);
-  const fetchProducts = useStoreActions((actions) => actions.fetchProducts);
+  const fetchCartItems = useStoreActions((actions) => actions.fetchCartItems);
   const addProductToCart = useStoreActions(
     (actions) => actions.cart.addProductToCart
   );
@@ -27,7 +27,7 @@ export default function Grid({ categoryName, userId }) {
   );
 
   useEffect(() => {
-    userId && fetchProducts();
+    userId && fetchCartItems();
   }, []);
 
   //fetch products by category
@@ -80,7 +80,10 @@ export default function Grid({ categoryName, userId }) {
                           />
                         </Col>
 
-                        <Col xs={7} className="text-center px-0 my-auto">
+                        <Col
+                          xs={7}
+                          className="text-center d-flex justify-content-center align-items-center flex-column"
+                        >
                           {userId ? (
                             <Fragment>
                               <Link
