@@ -37,7 +37,7 @@ export const cartResolver = {
           data: {
             profileId: context.userId,
             cartItems: {
-              create: [...cartItems],
+              create: cartItems,
             },
           },
         });
@@ -46,7 +46,7 @@ export const cartResolver = {
           data: {
             profileId: context.userId,
             cartItems: {
-              create: [...cartItems],
+              create: cartItems,
             },
           },
         });

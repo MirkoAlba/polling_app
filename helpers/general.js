@@ -15,3 +15,8 @@ export const capitalizeEveryWord = (text) =>
     .split(" ")
     .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
     .join(" ");
+
+//faccio upsert dopo un delay perchè aspetto che aggiorna lo state globale di easy-peasy
+export const timeout = (delay) => {
+  return new Promise((res) => setTimeout(res, delay));
+};

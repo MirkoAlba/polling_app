@@ -18,6 +18,7 @@ export default function Home({ userId, viewportWidth, categories }) {
   const setUserIdInCart = useStoreActions((actions) => actions.setUserId);
   const cart = useStoreState((state) => state.cart);
   console.log(cart);
+
   useEffect(() => {
     userId && (fetchProducts(), setUserIdInCart(userIdInCart));
   }, []);

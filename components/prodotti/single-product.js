@@ -1,13 +1,40 @@
 import { Container, Row, Col } from "react-bootstrap";
 
+import { useEffect } from "react";
+
+import { useMutation } from "@apollo/client";
+import { UPSERT_CART } from "../../graphql/mutations";
+
 import Image from "next/image";
 import Link from "next/link";
 
-import { breakpoint } from "../../helpers/general";
+import { useStoreActions, useStoreState } from "easy-peasy";
+
+import { breakpoint, timeout } from "../../helpers/general";
 
 export default function SingleProduct({ userId, viewportWidth, product }) {
   const smart = viewportWidth < breakpoint.sm;
   const desk = viewportWidth > breakpoint.sm;
+
+  const fetchProducts = useStoreActions((actions) => actions.fetchProducts);
+  const cart = useStoreState((state) => state.cart);
+  const addProductToCart = useStoreActions(
+    (actions) => actions.cart.addProductToCart
+  );
+  const removeProduct = useStoreActions(
+    (actions) => actions.cart.removeProduct
+  );
+
+  useEffect(() => {
+    userId && fetchProducts();
+  }, []);
+
+  //upsert cart
+  const [upsertCart] = useMutation(UPSERT_CART, {
+    variables: {
+      createCartInput: { cartItems: cart.cartItems },
+    },
+  });
 
   return (
     <Container className="single-product">
@@ -42,9 +69,30 @@ export default function SingleProduct({ userId, viewportWidth, product }) {
           </p>
           {desk &&
             (userId ? (
-              <a href="#" className="btn btn__inverted">
-                Aggiungi all' ordine
-              </a>
+              cart.cartItems.filter((p) => p.productId === product.id).length >
+              0 ? (
+                <a
+                  onClick={async () => {
+                    removeProduct(productt.id);
+                    await timeout(1);
+                    upsertCart();
+                  }}
+                  className="btn btn__remove mt-3"
+                >
+                  Rimuovi dall' ordine
+                </a>
+              ) : (
+                <a
+                  onClick={async () => {
+                    addProductToCart(product);
+                    await timeout(1);
+                    upsertCart();
+                  }}
+                  className="btn btn__add mt-3"
+                >
+                  Aggiungi all' ordine
+                </a>
+              )
             ) : (
               <Link href="/register">
                 <a className="btn btn__inverted mt-5 mt-lg-5">
@@ -57,9 +105,30 @@ export default function SingleProduct({ userId, viewportWidth, product }) {
         {smart && (
           <Col xs={12} className="text-center">
             {userId ? (
-              <a href="#" className="btn btn__inverted mt-3">
-                Aggiungi all' ordine
-              </a>
+              cart.cartItems.filter((p) => p.productId === product.id).length >
+              0 ? (
+                <a
+                  onClick={async () => {
+                    removeProduct(product.id);
+                    await timeout(1);
+                    upsertCart();
+                  }}
+                  className="btn btn__remove mt-3"
+                >
+                  Rimuovi dall' ordine
+                </a>
+              ) : (
+                <a
+                  onClick={async () => {
+                    addProductToCart(product);
+                    await timeout(1);
+                    upsertCart();
+                  }}
+                  className="btn btn__add mt-3"
+                >
+                  Aggiungi all' ordine
+                </a>
+              )
             ) : (
               <Link href="/register">
                 <a className="btn btn__inverted mt-5 mt-lg-5">

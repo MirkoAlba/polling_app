@@ -9,7 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { capitalize } from "../../helpers/general";
+import { capitalize, timeout } from "../../helpers/general";
 
 import { useStoreActions, useStoreState } from "easy-peasy";
 
@@ -41,13 +41,11 @@ export default function Grid({ categoryName, userId }) {
 
   //upsert cart
   const [upsertCart] = useMutation(UPSERT_CART, {
-    onCompleted: (d) => console.log(d.UpsertCart),
+    // onCompleted: (d) => console.log(d.UpsertCart),
     variables: {
       createCartInput: { cartItems: cart.cartItems },
     },
   });
-
-  console.log(cart.cartItems);
 
   return (
     <Container>
@@ -66,14 +64,14 @@ export default function Grid({ categoryName, userId }) {
                   key={p.id}
                   xs={{ span: 10, offset: 1 }}
                   md={{ span: 6, offset: 0 }}
-                  lg={4}
-                  className="pb-3"
+                  lg={6}
+                  className="pb-3 pb-md-5"
                 >
                   <div className="product-card">
                     <div className="product-card__container mx-auto position-relative">
                       <h3 className="text-center my-4 ">{p.productName}</h3>
                       <Row className="shadow-none">
-                        <Col className="shadow-none" xs={6}>
+                        <Col className="shadow-none" xs={5}>
                           <Image
                             className="product-card__container__image"
                             src={p.productImagePath}
@@ -82,7 +80,7 @@ export default function Grid({ categoryName, userId }) {
                           />
                         </Col>
 
-                        <Col xs={6} className="text-center px-0 my-auto">
+                        <Col xs={7} className="text-center px-0 my-auto">
                           {userId ? (
                             <Fragment>
                               <Link
@@ -100,8 +98,9 @@ export default function Grid({ categoryName, userId }) {
                                 (e) => e.productId === p.id
                               ).length > 0 ? (
                                 <a
-                                  onClick={() => {
+                                  onClick={async () => {
                                     removeProduct(p.id);
+                                    await timeout(1);
                                     upsertCart();
                                   }}
                                   className="btn btn__remove mt-2"
@@ -110,9 +109,10 @@ export default function Grid({ categoryName, userId }) {
                                 </a>
                               ) : (
                                 <a
-                                  onClick={() => {
+                                  onClick={async () => {
                                     addProductToCart(p);
-                                    upsertCart();
+                                    await timeout(1);
+                                    await upsertCart();
                                   }}
                                   className="btn btn__add mt-2"
                                 >
