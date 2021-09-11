@@ -77,7 +77,7 @@ export const GET_CURRENT_USER_CART = gql`
       #   }
       # }
 
-      orderItems {
+      cartItems {
         quantity
         productCost
 

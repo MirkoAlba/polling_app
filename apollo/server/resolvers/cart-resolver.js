@@ -7,35 +7,16 @@ export const cartResolver = {
         throw new AuthenticationError("Non Autenticato");
       }
 
-      const cart = await context.prisma.cart.findFirst({
+      return await context.prisma.cart.findFirst({
         where: {
           profileId: context.userId,
         },
       });
-
-      return cart;
     },
   },
 
   Mutation: {
-    async CreateCart(_, { createCartInput: { orderItems } }, context) {
-      if (!context.userId) {
-        throw new AuthenticationError("Non Autenticato");
-      }
-
-      const cart = await context.prisma.cart.create({
-        data: {
-          profileId: context.userId,
-          orderItems: {
-            create: orderItems,
-          },
-        },
-      });
-
-      return cart;
-    },
-
-    async UpdateCart(_, { orderItems }, context) {
+    async UpsertCart(_, { createCartInput: { cartItems } }, context) {
       if (!context.userId) {
         throw new AuthenticationError("Non Autenticato");
       }
@@ -44,30 +25,32 @@ export const cartResolver = {
         where: {
           profileId: context.userId,
         },
-        include: {
-          orderItems: true,
-        },
       });
 
-      if (!cart) {
-        throw new Error("Carrello non esiste!");
-      }
-
-      // console.log("orderItems: ", orderItems);
-
-      cart.orderItems.map(async (o) => {
-        const res = await context.prisma.orderItem.update({
+      if (cart) {
+        await context.prisma.cart.delete({
           where: {
-            id: o.id,
+            id: cart.id,
           },
-
-          data: {},
         });
-
-        console.log("newOrderItems: ", res);
-      });
-
-      return cart;
+        return await context.prisma.cart.create({
+          data: {
+            profileId: context.userId,
+            cartItems: {
+              create: [...cartItems],
+            },
+          },
+        });
+      } else {
+        return await context.prisma.cart.create({
+          data: {
+            profileId: context.userId,
+            cartItems: {
+              create: [...cartItems],
+            },
+          },
+        });
+      }
     },
   },
 };

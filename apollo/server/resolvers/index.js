@@ -114,23 +114,29 @@ export const resolvers = {
 
   Cart: {
     profile: async (parent, _, context) => {
-      const user = await context.prisma.profile.findUnique({
+      return await context.prisma.profile.findUnique({
         where: {
           id: context.userId,
         },
       });
-
-      return user;
     },
 
-    orderItems: async (parent, _, context) => {
-      const orderItems = await context.prisma.orderItem.findMany({
+    cartItems: async (parent, _, context) => {
+      return await context.prisma.cartItem.findMany({
         where: {
           cartId: parent.id,
         },
       });
+    },
+  },
 
-      return orderItems;
+  CartItem: {
+    product: async (parent, _, context) => {
+      return await context.prisma.product.findUnique({
+        where: {
+          id: parent.productId,
+        },
+      });
     },
   },
   //---------- End Top-level resolvers ----------

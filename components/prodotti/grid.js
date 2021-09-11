@@ -1,8 +1,9 @@
 import { Container, Row, Col } from "react-bootstrap";
 
 import { Fragment, useState, useEffect } from "react";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { GET_PRODUCTS_BY_CATEGORY } from "../../graphql/queries";
+import { UPSERT_CART } from "../../graphql/mutations";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -15,6 +16,21 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 export default function Grid({ categoryName, userId }) {
   const router = useRouter();
 
+  //store
+  const cart = useStoreState((state) => state.cart);
+  const fetchProducts = useStoreActions((actions) => actions.fetchProducts);
+  const addProductToCart = useStoreActions(
+    (actions) => actions.cart.addProductToCart
+  );
+  const removeProduct = useStoreActions(
+    (actions) => actions.cart.removeProduct
+  );
+
+  useEffect(() => {
+    userId && fetchProducts();
+  }, []);
+
+  //fetch products by category
   const [products, setProducts] = useState([]);
   const { loading, _data, error } = useQuery(GET_PRODUCTS_BY_CATEGORY, {
     onCompleted: (d) => {
@@ -23,16 +39,15 @@ export default function Grid({ categoryName, userId }) {
     variables: { categoryName },
   });
 
-  const cart = useStoreState((state) => state.cart);
-  console.log(cart);
-  // console.log(cart.orderItems[0].product.id);
+  //upsert cart
+  const [upsertCart] = useMutation(UPSERT_CART, {
+    onCompleted: (d) => console.log(d.UpsertCart),
+    variables: {
+      createCartInput: { cartItems: cart.cartItems },
+    },
+  });
 
-  const addProductToCart = useStoreActions(
-    (actions) => actions.cart.addProductToCart
-  );
-  const removeProduct = useStoreActions(
-    (actions) => actions.cart.removeProduct
-  );
+  console.log(cart.cartItems);
 
   return (
     <Container>
@@ -67,7 +82,7 @@ export default function Grid({ categoryName, userId }) {
                           />
                         </Col>
 
-                        <Col xs={6} className="text-center my-auto">
+                        <Col xs={6} className="text-center px-0 my-auto">
                           {userId ? (
                             <Fragment>
                               <Link
@@ -77,20 +92,28 @@ export default function Grid({ categoryName, userId }) {
                                   .replace(/\s/g, "-")
                                   .toLowerCase()}`}
                               >
-                                <a className="btn btn__inverted mb-2">Scopri</a>
+                                <a className="btn btn__inverted mb-2">
+                                  Personalizza
+                                </a>
                               </Link>
-                              {cart.orderItems.filter(
-                                (e) => e.product.id === p.id
+                              {cart.cartItems.filter(
+                                (e) => e.productId === p.id
                               ).length > 0 ? (
                                 <a
-                                  onClick={() => removeProduct(p.id)}
+                                  onClick={() => {
+                                    removeProduct(p.id);
+                                    upsertCart();
+                                  }}
                                   className="btn btn__remove mt-2"
                                 >
                                   Rimuovi
                                 </a>
                               ) : (
                                 <a
-                                  onClick={() => addProductToCart(p)}
+                                  onClick={() => {
+                                    addProductToCart(p);
+                                    upsertCart();
+                                  }}
                                   className="btn btn__add mt-2"
                                 >
                                   Aggiungi

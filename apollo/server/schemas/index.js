@@ -79,15 +79,12 @@ export const typeDefs = gql`
     id: ID!
     quantity: Int!
     productCost: Float!
-
     # product relationship
     product: Product
     productId: ID!
-
     # order relationship
     order: Order
     orderId: ID
-
     # cart
     cart: Cart
   }
@@ -95,12 +92,22 @@ export const typeDefs = gql`
   # ---------- Cart Types ----------
   type Cart {
     id: ID!
-
     # profile ref
     profile: Profile
+    # cartItems
+    cartItems: [CartItem]
+  }
 
-    # orderItems
-    orderItems: [OrderItem]
+  type CartItem {
+    id: ID!
+    quantity: Int!
+    productCost: Float!
+    # product relationship
+    product: Product
+    productId: ID!
+    # cart relationship
+    cart: Cart
+    cartId: ID!
   }
 
   # ---------- Inputs ----------
@@ -126,7 +133,13 @@ export const typeDefs = gql`
   }
 
   input CreateCartInput {
-    orderItems: [OrderItemInput]
+    cartItems: [CartItemInput]!
+  }
+
+  input CartItemInput {
+    quantity: Int!
+    productCost: Float!
+    productId: ID!
   }
 
   # ---------- Operations ----------
@@ -157,7 +170,6 @@ export const typeDefs = gql`
     CreateOrder(createOrderInput: CreateOrderInput!): Order
 
     # Cart
-    CreateCart(createCartInput: CreateCartInput): Cart!
-    UpdateCart(orderItems: [OrderItemInput!]!): Cart!
+    UpsertCart(createCartInput: CreateCartInput): Cart!
   }
 `;

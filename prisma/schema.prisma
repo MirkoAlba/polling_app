@@ -7,7 +7,8 @@ datasource db {
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialActions"]
 }
 
 //npx prisma migrate dev crea nuove migrations
@@ -54,8 +55,9 @@ model Product {
   //relazione: molti prodotti appartengono ad una determinata categoria
   category           Category    @relation(fields: [categoryId], references: [id])
   categoryId         String
-  // 1 prodotto può essere 1 o più OrderItem
+  // 1 prodotto può essere 1 o più OrderItem, CartItem
   orderItems         OrderItem[]
+  cartItems          CartItem[]
 }
 
 model Order {
@@ -80,16 +82,24 @@ model OrderItem {
   // più orderItem appartengono ad un Order
   orderId     String?
   order       Order?  @relation(fields: [orderId], references: [id])
-  //carrello associato, gli orderItem appartengono ad un carrello
-  cartId      String?
-  cart        Cart?   @relation(fields: [cartId], references: [id])
 }
 
 model Cart {
-  id         String      @id @default(cuid())
+  id        String     @id @default(cuid())
   // profilo associato al carrello
-  profileId  String
-  profile    Profile     @relation(fields: [profileId], references: [id])
-  // 1 cart ha più orderItem
-  orderItems OrderItem[]
+  profileId String
+  profile   Profile    @relation(fields: [profileId], references: [id])
+  cartItems CartItem[]
+}
+
+model CartItem {
+  id          String  @id @default(cuid())
+  quantity    Int
+  productCost Float   @default(0)
+  // stessa roba con orderItem
+  productId   String
+  product     Product @relation(fields: [productId], references: [id])
+  // ogni cartItem è associato ad un carrello
+  cart        Cart?   @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  cartId      String?
 }

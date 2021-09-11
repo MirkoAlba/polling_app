@@ -17,3 +17,23 @@ export const LOGOUT = gql`
     Logout
   }
 `;
+
+export const UPSERT_CART = gql`
+  mutation UpsertCart($createCartInput: CreateCartInput!) {
+    UpsertCart(createCartInput: $createCartInput) {
+      id
+
+      profile {
+        id
+        email
+      }
+
+      cartItems {
+        id
+        quantity
+        productId
+        productCost
+      }
+    }
+  }
+`;
