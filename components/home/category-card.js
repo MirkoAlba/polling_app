@@ -1,9 +1,10 @@
 import { Container, Row, Col } from "react-bootstrap";
+import { breakpoint } from "../../helpers/general";
 import Link from "next/link";
 
-export default function CategoryCard({ categories }) {
+export default function CategoryCard({ categories, viewportWidth, myRef }) {
   return (
-    <Container>
+    <Container className="position-relative">
       <Row>
         <Col xs={12}>
           <div className="pt-5">
@@ -40,6 +41,14 @@ export default function CategoryCard({ categories }) {
           );
         })}
       </Row>
+      <div
+        className="fix-scroll"
+        style={{
+          height: viewportWidth < breakpoint.sm ? "80px" : "120px",
+          top: viewportWidth < breakpoint.sm ? "-80px" : "-120px",
+        }}
+        ref={myRef}
+      ></div>
     </Container>
   );
 }

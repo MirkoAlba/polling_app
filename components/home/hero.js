@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function Hero({ userId, viewportWidth, myRef, executeScroll }) {
+export default function Hero({ userId, executeScroll }) {
   return (
     <div className="hero position-relative">
       <div className="hero__container d-flex flex-column justify-content-around align-items-center">
@@ -15,12 +15,6 @@ export default function Hero({ userId, viewportWidth, myRef, executeScroll }) {
           </a>
         </div>
       </div>
-
-      <div
-        className="fix-scroll"
-        style={{ height: viewportWidth < 568 ? "80px" : "120px" }}
-        ref={myRef}
-      ></div>
     </div>
   );
 }

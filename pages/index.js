@@ -1,5 +1,6 @@
 import Hero from "../components/home/hero";
 import CategoryCard from "../components/home/category-card";
+import Customize from "../components/home/customize";
 import { Fragment, useEffect, useRef } from "react";
 
 import { createPrismaClient } from "../apollo/server/db/context";
@@ -17,7 +18,6 @@ export default function Home({ userId, viewportWidth, categories }) {
   const fetchCartItems = useStoreActions((actions) => actions.fetchCartItems);
   const setUserIdInCart = useStoreActions((actions) => actions.setUserId);
   const cart = useStoreState((state) => state.cart);
-  console.log(cart);
 
   useEffect(() => {
     userId && (fetchCartItems(), setUserIdInCart(userIdInCart));
@@ -25,13 +25,13 @@ export default function Home({ userId, viewportWidth, categories }) {
 
   return (
     <Fragment>
-      <Hero
-        myRef={myRef}
-        executeScroll={executeScroll}
-        userId={userId}
+      <Hero executeScroll={executeScroll} userId={userId} />
+      <Customize />
+      <CategoryCard
         viewportWidth={viewportWidth}
+        myRef={myRef}
+        categories={categories}
       />
-      <CategoryCard categories={categories} />
     </Fragment>
   );
 }
