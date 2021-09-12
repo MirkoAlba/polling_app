@@ -20,3 +20,8 @@ export const capitalizeEveryWord = (text) =>
 export const timeout = (delay) => {
   return new Promise((res) => setTimeout(res, delay));
 };
+
+export const getCurrentProductQuantity = (cartItems, id) => {
+  const p = cartItems.filter((item) => item.productId === id);
+  return p[0]?.quantity;
+};

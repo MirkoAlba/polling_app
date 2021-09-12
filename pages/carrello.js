@@ -3,20 +3,18 @@ import { useEffect } from "react";
 import { queryClient } from "../helpers/query-client";
 import { gql } from "@apollo/client";
 
-import { useStoreState, useStoreActions } from "easy-peasy";
+import { useStoreActions } from "easy-peasy";
 
 import CartComponent from "../components/cart/cart";
 
-export default function Cart({ userId }) {
-  console.log("cart: ", userId);
-  const cart = useStoreState((state) => state.cart);
+export default function Cart({ userId, viewportWidth }) {
   const fetchCartItems = useStoreActions((actions) => actions.fetchCartItems);
 
   useEffect(() => {
     userId && fetchCartItems();
   }, []);
 
-  return <CartComponent cart={cart} />;
+  return <CartComponent viewportWidth={viewportWidth} />;
 }
 
 export async function getServerSideProps({ req, res }) {

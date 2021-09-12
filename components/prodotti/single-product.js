@@ -10,7 +10,11 @@ import Link from "next/link";
 
 import { useStoreActions, useStoreState } from "easy-peasy";
 
-import { breakpoint, timeout } from "../../helpers/general";
+import {
+  breakpoint,
+  timeout,
+  getCurrentProductQuantity,
+} from "../../helpers/general";
 
 export default function SingleProduct({ userId, viewportWidth, product }) {
   const smart = viewportWidth < breakpoint.sm;
@@ -40,13 +44,6 @@ export default function SingleProduct({ userId, viewportWidth, product }) {
       createCartInput: { cartItems: cart.cartItems },
     },
   });
-
-  console.log("single: ", cart);
-
-  const getCurrentProductQuantity = (cartItems, id) => {
-    const p = cartItems.filter((item) => item.productId === id);
-    return p[0].quantity;
-  };
 
   return (
     <Container className="single-product">
@@ -84,16 +81,6 @@ export default function SingleProduct({ userId, viewportWidth, product }) {
               cart.cartItems?.filter((p) => p.productId === product.id).length >
               0 ? (
                 <Fragment>
-                  <div
-                    style={{ gap: "15px" }}
-                    className="d-flex align-items-center justify-content-center mt-4"
-                  >
-                    <p onClick={() => addQuantity(product.id)}>+</p>
-                    <p>
-                      {getCurrentProductQuantity(cart.cartItems, product.id)}
-                    </p>
-                    <p onClick={() => removeQuantity(product.id)}>-</p>
-                  </div>
                   <a
                     onClick={async () => {
                       removeProduct(product.id);
@@ -104,17 +91,37 @@ export default function SingleProduct({ userId, viewportWidth, product }) {
                   >
                     Rimuovi dall' ordine
                   </a>
-                </Fragment>
-              ) : (
-                <Fragment>
                   <div
                     style={{ gap: "15px" }}
                     className="d-flex align-items-center justify-content-center mt-4"
                   >
-                    <p>ciao</p>
-                    <p>0</p>
-                    <p>ciao</p>
+                    <p
+                      className="add"
+                      onClick={async () => {
+                        addQuantity(product.id);
+                        await timeout(1);
+                        upsertCart();
+                      }}
+                    >
+                      +
+                    </p>
+                    <p>
+                      {getCurrentProductQuantity(cart.cartItems, product.id)}
+                    </p>
+                    <p
+                      className="remove"
+                      onClick={async () => {
+                        removeQuantity(product.id);
+                        await timeout(1);
+                        upsertCart();
+                      }}
+                    >
+                      -
+                    </p>
                   </div>
+                </Fragment>
+              ) : (
+                <Fragment>
                   <a
                     onClick={async () => {
                       addProductToCart(product);
@@ -141,16 +148,46 @@ export default function SingleProduct({ userId, viewportWidth, product }) {
             {userId ? (
               cart.cartItems.filter((p) => p.productId === product.id).length >
               0 ? (
-                <a
-                  onClick={async () => {
-                    removeProduct(product.id);
-                    await timeout(1);
-                    upsertCart();
-                  }}
-                  className="btn btn__remove mt-3"
-                >
-                  Rimuovi dall' ordine
-                </a>
+                <Fragment>
+                  <a
+                    onClick={async () => {
+                      removeProduct(product.id);
+                      await timeout(1);
+                      upsertCart();
+                    }}
+                    className="btn btn__remove mt-4"
+                  >
+                    Rimuovi dall' ordine
+                  </a>
+                  <div
+                    style={{ gap: "15px" }}
+                    className="d-flex align-items-center justify-content-center mt-4"
+                  >
+                    <p
+                      className="add"
+                      onClick={async () => {
+                        addQuantity(product.id);
+                        await timeout(1);
+                        upsertCart();
+                      }}
+                    >
+                      +
+                    </p>
+                    <p className="quantity">
+                      {getCurrentProductQuantity(cart.cartItems, product.id)}
+                    </p>
+                    <p
+                      className="remove"
+                      onClick={async () => {
+                        removeQuantity(product.id);
+                        timeout(1);
+                        upsertCart();
+                      }}
+                    >
+                      -
+                    </p>
+                  </div>
+                </Fragment>
               ) : (
                 <a
                   onClick={async () => {

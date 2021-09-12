@@ -1,8 +1,12 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Navbar, Container } from "react-bootstrap";
 import Link from "next/link";
 
+import { useStoreState } from "easy-peasy";
+
 export default function Header({ userId }) {
+  const [mounted, setMounted] = useState(false);
+
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(!open);
 
@@ -13,11 +17,20 @@ export default function Header({ userId }) {
   };
 
   useEffect(() => {
+    setMounted(true);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  var itemsInCart = 0;
+  const cart = useStoreState((state) => state.cart);
+  if (mounted) {
+    cart.cartItems.map((item) => {
+      itemsInCart += item.quantity;
+    });
+  }
 
   return (
     <div
@@ -36,21 +49,41 @@ export default function Header({ userId }) {
           <div className="wrapper-icons">
             {userId && (
               <Link href="/carrello">
-                <a href="#">
+                <a className="position-relative" href="#">
                   {scrollPosition > 200 ? (
-                    <img
-                      height="40"
-                      width="40"
-                      src="/icons/pizza.svg"
-                      alt="Carrello"
-                    />
+                    <Fragment>
+                      <img
+                        className="cartIcon"
+                        height="40"
+                        width="40"
+                        src="/icons/pizza.svg"
+                        alt="Carrello"
+                      />
+                      <span
+                        className={`${
+                          itemsInCart === 0 ? "d-none" : "d-block"
+                        } cartIcon__number`}
+                      >
+                        {itemsInCart}
+                      </span>
+                    </Fragment>
                   ) : (
-                    <img
-                      height="40"
-                      width="40"
-                      src="/icons/pizza-red.svg"
-                      alt="Carrello"
-                    />
+                    <Fragment>
+                      <img
+                        className="cartIcon"
+                        height="40"
+                        width="40"
+                        src="/icons/pizza-red.svg"
+                        alt="Carrello"
+                      />
+                      <span
+                        className={`${
+                          itemsInCart === 0 ? "d-none" : "d-block"
+                        } cartIcon__number`}
+                      >
+                        {itemsInCart}
+                      </span>
+                    </Fragment>
                   )}
                 </a>
               </Link>

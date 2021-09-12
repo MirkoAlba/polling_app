@@ -78,12 +78,16 @@ export const GET_CURRENT_USER_CART = gql`
       # }
 
       cartItems {
+        id
         quantity
         productCost
 
         product {
           id
           productName
+          productDescription
+          productCost
+          productImagePath
         }
       }
     }

@@ -67,3 +67,18 @@ body {
     color: $white;
   }
 }
+
+.add,
+.remove {
+  font-size: 1.5rem;
+  padding: 0 0.5rem;
+  border-radius: 50px;
+}
+
+.add {
+  border: 2px solid green;
+}
+
+.remove {
+  border: 2px solid red;
+}

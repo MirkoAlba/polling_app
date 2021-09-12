@@ -29,20 +29,16 @@ export const store = createStore(
         const product = state.cartItems.find(
           (item) => item.productId === payload
         );
-
         product.quantity += 1;
-        console.log("addQ", debug(product));
       }),
       //remove quantity payload = id
       removeQuantity: action((state, payload) => {
         const product = state.cartItems.find(
           (item) => item.productId === payload
         );
-
-        product.quantity === 0
-          ? (product.quantity = 0)
+        product.quantity === 1
+          ? (product.quantity = 1)
           : (product.quantity -= 1);
-        console.log("remQ: ", debug(product));
       }),
     },
 
