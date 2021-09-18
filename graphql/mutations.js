@@ -37,3 +37,40 @@ export const UPSERT_CART = gql`
     }
   }
 `;
+
+export const CREATE_ORDER = gql`
+  mutation createOrder($createOrderInput: CreateOrderInput!) {
+    CreateOrder(createOrderInput: $createOrderInput) {
+      id
+      total
+      createdAt
+      state
+
+      profile {
+        id
+
+        user {
+          firstName
+          lastName
+          cellNumber
+        }
+      }
+
+      orderItems {
+        id
+        quantity
+        productCost
+
+        product {
+          productName
+          productCost
+        }
+
+        order {
+          id
+          profileId
+        }
+      }
+    }
+  }
+`;

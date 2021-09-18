@@ -64,6 +64,7 @@ model Order {
   total      Float
   createdAt  DateTime    @default(now())
   state      String      @default(dbgenerated("Ricevuto"))
+  delivery   String      @default(dbgenerated("consegna"))
   // 1 o più ordini appartengono ad un profile
   profileId  String
   profile    Profile     @relation(fields: [profileId], references: [id])

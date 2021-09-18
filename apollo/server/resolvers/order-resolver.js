@@ -1,18 +1,56 @@
-import { AuthenticationError } from "apollo-server-micro";
+import { AuthenticationError, UserInputError } from "apollo-server-micro";
+import { validateDeliveryAddress } from "../util/validators";
 
 export const orderResolver = {
   Query: {},
   Mutation: {
     // per creare ordine serve un array di OrderItem, total, userId
-    async CreateOrder(_, { createOrderInput: { orderItems, total } }, context) {
+    async CreateOrder(
+      _,
+      {
+        createOrderInput: {
+          orderItems,
+          total,
+          via,
+          numeroCivico,
+          citta,
+          provincia,
+          cap,
+        },
+      },
+      context
+    ) {
       if (!context.userId) {
         throw new AuthenticationError("Non Autenticato");
       }
+
+      const { errors, valid } = validateDeliveryAddress(
+        via,
+        numeroCivico,
+        citta,
+        provincia,
+        cap
+      );
+
+      if (!valid)
+        throw new UserInputError("Errori nell' indirizzo", { errors });
+
+      const delivery = via.concat(
+        " ",
+        numeroCivico.toString(),
+        " ",
+        citta,
+        " ",
+        provincia,
+        " ",
+        cap.toString()
+      );
 
       // creo order
       const order = await context.prisma.order.create({
         data: {
           total,
+          delivery,
           profileId: context.userId,
         },
       });
@@ -29,6 +67,20 @@ export const orderResolver = {
         });
         return oi;
       });
+
+      const cart = await context.prisma.cart.findFirst({
+        where: {
+          profileId: context.userId,
+        },
+      });
+
+      // elimino il cart e i cartItems di conseguenza
+      await context.prisma.cart.delete({
+        where: {
+          id: cart.id,
+        },
+      });
+
       // console.log(order);
       return order;
     },

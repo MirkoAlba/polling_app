@@ -92,3 +92,36 @@ export function validateLoginInput(userEmail, userPassword) {
     valid: Object.keys(errors).length < 1,
   };
 }
+
+export function validateDeliveryAddress(
+  via,
+  numeroCivico,
+  citta,
+  provincia,
+  cap
+) {
+  const errors = {};
+
+  if (via.trim() === "") errors.via = "Campo via richiesto!";
+  if (citta.trim() === "") errors.citta = "Campo città richiesto!";
+  if (provincia.trim() === "") errors.provincia = "Campo provincia richiesto!";
+
+  if (!cap) {
+    errors.cap = "Campo CAP richiesto!";
+  } else if (typeof cap !== "number") {
+    errors.cap = "Deve essere un numero!";
+  } else if (cap.toString().length !== 5) {
+    errors.cap = "Deve essere 5 cifre";
+  }
+
+  if (!numeroCivico) {
+    errors.numeroCivico = "Campo Numero civico richiesto!";
+  } else if (typeof numeroCivico !== "number") {
+    errors.numeroCivico = "Deve essere un numero!";
+  }
+
+  return {
+    errors,
+    valid: Object.keys(errors).length < 1,
+  };
+}

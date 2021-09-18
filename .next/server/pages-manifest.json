@@ -2,6 +2,9 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+  "/carrello": "pages/carrello.js",
+  "/api/graphql": "pages/api/graphql.js",
+  "/profilo": "pages/profilo.js",
   "/checkout": "pages/checkout.js",
   "/register": "pages/register.js"
 }

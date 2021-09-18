@@ -66,6 +66,7 @@ export const typeDefs = gql`
     total: Float!
     createdAt: String!
     state: String!
+    delivery: String!
 
     #profile relation
     profile: Profile!
@@ -121,8 +122,12 @@ export const typeDefs = gql`
   }
 
   input CreateOrderInput {
-    userId: ID!
     total: Float!
+    via: String!
+    numeroCivico: Int!
+    citta: String!
+    provincia: String!
+    cap: Int!
     orderItems: [OrderItemInput]!
   }
 
