@@ -132,7 +132,7 @@ export default function CartComponent({ viewportWidth }) {
               );
             })}
           <Col xs={12} className="mt-5 text-center">
-            {stateCart.cartItems.lenght > 0 ? (
+            {stateCart.cartItems.length > 0 ? (
               <a className="btn btn__inverted">concludi il tuo ordine</a>
             ) : (
               <Fragment>

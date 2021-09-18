@@ -3,7 +3,5 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/carrello": "pages/carrello.js",
-  "/": "pages/index.js",
-  "/api/graphql": "pages/api/graphql.js",
   "/prodotti/[categoryName]": "pages/prodotti/[categoryName].js"
 }
