@@ -2,7 +2,19 @@ import { AuthenticationError, UserInputError } from "apollo-server-micro";
 import { validateDeliveryAddress } from "../util/validators";
 
 export const orderResolver = {
-  Query: {},
+  Query: {
+    async GetAllCurrentUserOrders(_, __, context) {
+      if (!context.userId) {
+        throw new AuthenticationError("Non Autenticato");
+      }
+
+      return await context.prisma.order.findMany({
+        where: {
+          profileId: context.userId,
+        },
+      });
+    },
+  },
   Mutation: {
     // per creare ordine serve un array di OrderItem, total, userId
     async CreateOrder(

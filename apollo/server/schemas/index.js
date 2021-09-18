@@ -64,7 +64,7 @@ export const typeDefs = gql`
   type Order {
     id: ID!
     total: Float!
-    createdAt: String!
+    createdAt: Date!
     state: String!
     delivery: String!
 
@@ -160,6 +160,9 @@ export const typeDefs = gql`
     GetAllProducts: [Product]!
     GetProductsByCategory(categoryName: String!): [Product]
     GetProductById(id: ID!): Product!
+
+    # Order
+    GetAllCurrentUserOrders: [Order]
 
     # Cart
     GetCurrentUserCart: Cart

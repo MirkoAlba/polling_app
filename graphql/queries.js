@@ -93,3 +93,32 @@ export const GET_CURRENT_USER_CART = gql`
     }
   }
 `;
+
+export const GET_ALL_CURRENT_USER_ORDERS = gql`
+  query GetAllCurrentUserOrders {
+    GetAllCurrentUserOrders {
+      id
+      total
+      createdAt
+      state
+      delivery
+
+      profile {
+        id
+        email
+        user {
+          firstName
+          lastName
+        }
+      }
+
+      orderItems {
+        quantity
+        product {
+          productName
+          productCost
+        }
+      }
+    }
+  }
+`;

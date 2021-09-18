@@ -37,14 +37,14 @@ export default function Profile({ userId }) {
                       id="info-0"
                       className="profile__info mt-3 mt-md-0 text-center selected"
                     >
-                      Account
+                      Ordini
                     </h3>
                     <h3
                       onClick={(e) => toggleClass(e, setSelected)}
                       id="info-1"
                       className="profile__info mt-3 mt-md-0 text-center"
                     >
-                      Ordini
+                      Account
                     </h3>
                     <h3
                       onClick={(e) => toggleClass(e, setSelected)}
