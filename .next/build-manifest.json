@@ -24,10 +24,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/carrello": [
+    "/checkout": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/carrello.js"
+      "static/chunks/pages/checkout.js"
     ],
     "/register": [
       "static/chunks/webpack.js",

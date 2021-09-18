@@ -132,9 +132,9 @@ export default function CartComponent({ viewportWidth }) {
             })}
           <Col xs={12} className="mt-5 text-center">
             {stateCart.cartItems.length > 0 ? (
-              <Fragment>
+              <Link href="/checkout">
                 <a className="btn btn__inverted">concludi il tuo ordine</a>
-              </Fragment>
+              </Link>
             ) : (
               <Fragment>
                 <p>sembra vuoto vai a spendere soldi!</p>
