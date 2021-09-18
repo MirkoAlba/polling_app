@@ -2,6 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/carrello": "pages/carrello.js",
-  "/prodotti/[categoryName]": "pages/prodotti/[categoryName].js"
+  "/register": "pages/register.js",
+  "/carrello": "pages/carrello.js"
 }

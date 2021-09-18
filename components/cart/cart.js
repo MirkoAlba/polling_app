@@ -17,7 +17,6 @@ import Link from "next/link";
 
 export default function CartComponent({ viewportWidth }) {
   const smart = viewportWidth < breakpoint.sm;
-  const desk = viewportWidth > breakpoint.sm;
 
   //store actions
   const stateCart = useStoreState((state) => state.cart);
@@ -133,7 +132,9 @@ export default function CartComponent({ viewportWidth }) {
             })}
           <Col xs={12} className="mt-5 text-center">
             {stateCart.cartItems.length > 0 ? (
-              <a className="btn btn__inverted">concludi il tuo ordine</a>
+              <Fragment>
+                <a className="btn btn__inverted">concludi il tuo ordine</a>
+              </Fragment>
             ) : (
               <Fragment>
                 <p>sembra vuoto vai a spendere soldi!</p>

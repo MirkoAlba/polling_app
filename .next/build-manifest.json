@@ -29,10 +29,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/carrello.js"
     ],
-    "/prodotti/[categoryName]": [
+    "/register": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/prodotti/[categoryName].js"
+      "static/chunks/pages/register.js"
     ]
   },
   "ampFirstPages": []
