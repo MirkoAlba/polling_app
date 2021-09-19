@@ -29,6 +29,7 @@ export const typeDefs = gql`
     password: String!
     confirmPassword: String!
     isAdmin: Boolean!
+    points: Float!
 
     createdAt: Date!
 

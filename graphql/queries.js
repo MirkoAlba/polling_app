@@ -14,6 +14,7 @@ export const ME = gql`
         email
         password
         isAdmin
+        points
       }
     }
   }

@@ -27,6 +27,7 @@ model Profile {
   password  String
   createdAt DateTime @default(now())
   isAdmin   Boolean  @default(false)
+  points    Float    @default(0)
 
   user   User    @relation(fields: [id], references: [id])
   userId String

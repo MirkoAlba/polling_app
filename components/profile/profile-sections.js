@@ -19,7 +19,7 @@ export default function ProfileSections({ selected, user }) {
     onCompleted: (d) => setOrders(d.GetAllCurrentUserOrders),
   });
 
-  orders && console.log(orders);
+  console.log(user);
 
   return (
     <div className="profile-sections mt-4">
@@ -32,8 +32,8 @@ export default function ProfileSections({ selected, user }) {
             : orders.length !== 0
             ? orders.map((order) => {
                 return (
-                  <div className="mb-5">
-                    <Accordion key={order.id}>
+                  <div key={order.id} className="mb-5">
+                    <Accordion>
                       <Accordion.Item eventKey={order.id}>
                         <Accordion.Header>
                           {/* rimuovo stringhe dall'id per semplificarlo */}
@@ -107,7 +107,7 @@ export default function ProfileSections({ selected, user }) {
         </Col>
       ) : (
         <Col xs={12} className="profile-sections__info-2">
-          Punti
+          {user.profile.points === 0 ? <h4>Ancora nessun punto.</h4> : punti}
         </Col>
       )}
     </div>
