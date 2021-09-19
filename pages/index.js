@@ -4,8 +4,10 @@ import Customize from "../components/home/customize";
 import { Fragment, useEffect, useRef } from "react";
 
 import { createPrismaClient } from "../apollo/server/db/context";
+import { queryClient } from "../helpers/query-client";
+import { gql } from "apollo-server-micro";
 
-import { useStoreActions, useStoreState } from "easy-peasy";
+import { useStoreActions } from "easy-peasy";
 
 export default function Home({ userId, viewportWidth, categories }) {
   const userIdInCart = userId ? userId : "";
@@ -17,7 +19,6 @@ export default function Home({ userId, viewportWidth, categories }) {
 
   const fetchCartItems = useStoreActions((actions) => actions.fetchCartItems);
   const setUserIdInCart = useStoreActions((actions) => actions.setUserId);
-  const cart = useStoreState((state) => state.cart);
 
   useEffect(() => {
     userId && (fetchCartItems(), setUserIdInCart(userIdInCart));
@@ -36,9 +37,39 @@ export default function Home({ userId, viewportWidth, categories }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps({ req }) {
   const prisma = createPrismaClient();
   const categories = await prisma.category.findMany();
+
+  var token = req.cookies.jid;
+
+  var data;
+  if (token) {
+    data = await queryClient({
+      query: gql`
+        query VerifyToken($token: String!) {
+          VerifyToken(token: $token) {
+            message
+            verified
+            userId
+            isAdmin
+          }
+        }
+      `,
+      variables: { token },
+    });
+  }
+
+  var isAdmin = data?.data?.VerifyToken.isAdmin;
+
+  if (isAdmin) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/admin",
+      },
+    };
+  }
 
   return {
     props: {

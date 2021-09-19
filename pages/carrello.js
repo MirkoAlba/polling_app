@@ -29,6 +29,7 @@ export async function getServerSideProps({ req, res }) {
             message
             verified
             userId
+            isAdmin
           }
         }
       `,
@@ -36,13 +37,22 @@ export async function getServerSideProps({ req, res }) {
     });
   }
 
-  var verificato = data?.data?.VerifyToken?.verified;
+  var verificato = data?.data?.VerifyToken;
 
-  if (!verificato) {
+  if (!verificato.verified) {
     return {
       redirect: {
         permanent: false,
         destination: "/",
+      },
+    };
+  }
+
+  if (verificato.isAdmin) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/admin",
       },
     };
   }

@@ -29,15 +29,40 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
+    "/admin": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/admin.js"
+    ],
+    "/carrello": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/carrello.js"
+    ],
+    "/checkout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/checkout.js"
+    ],
     "/next/dist/pages/_error": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/next/dist/pages/_error.js"
     ],
+    "/prodotti": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/prodotti.js"
+    ],
     "/profilo": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/profilo.js"
+    ],
+    "/register": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/register.js"
     ]
   },
   "ampFirstPages": []

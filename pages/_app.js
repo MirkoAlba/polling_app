@@ -19,6 +19,7 @@ import { store } from "../src/store";
 
 function MyApp({ Component, pageProps, tokenResponse, token }) {
   const [userId] = useState(tokenResponse?.userId);
+  const [isAdmin] = useState(tokenResponse?.isAdmin);
   const { width, height } = useWindowDimensions();
 
   setAccessToken(token); //setto il token per averlo a disposizione nei resolver tramite context
@@ -34,14 +35,23 @@ function MyApp({ Component, pageProps, tokenResponse, token }) {
           <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
           <script src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.js"></script>
         </Head>
-        <Layout viewportWidth={width} viewportHeight={height} userId={userId}>
+        {isAdmin ? (
           <Component
             {...pageProps}
             viewportWidth={width}
             viewportHeight={height}
             userId={userId}
           />
-        </Layout>
+        ) : (
+          <Layout viewportWidth={width} viewportHeight={height} userId={userId}>
+            <Component
+              {...pageProps}
+              viewportWidth={width}
+              viewportHeight={height}
+              userId={userId}
+            />
+          </Layout>
+        )}
       </AuthProvider>
     </StoreProvider>
   );
@@ -68,6 +78,7 @@ MyApp.getInitialProps = async (appContext) => {
             message
             verified
             userId
+            isAdmin
           }
         }
       `,

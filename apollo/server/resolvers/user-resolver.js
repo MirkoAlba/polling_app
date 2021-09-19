@@ -30,11 +30,13 @@ export const userResolver = {
                 message: `Token non valido: ${err.message}`,
                 verified: false,
                 userId: "",
+                isAdmin: false,
               }
             : {
                 message: "Verificato",
                 verified: true,
                 userId: decoded.profileId,
+                isAdmin: decoded.isAdmin,
               };
         }
       );
@@ -148,6 +150,7 @@ export const userResolver = {
       const token = jwt.sign(
         {
           profileId: profile.id,
+          isAdmin: profile.isAdmin,
         },
         process.env.TOKEN_SECRET_KEY,
         { expiresIn: "2h" }

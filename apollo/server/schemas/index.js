@@ -6,6 +6,7 @@ export const typeDefs = gql`
     message: String!
     verified: Boolean!
     userId: ID!
+    isAdmin: Boolean!
   }
 
   # ---------- Scalar Types ----------

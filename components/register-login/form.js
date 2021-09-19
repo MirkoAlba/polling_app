@@ -3,8 +3,6 @@ import { Fragment, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { REGISTER_MUTATION, LOGIN_MUTATION } from "../../graphql/mutations";
 import { setAccessToken } from "../../apollo/client/accessToken";
-// import { useRouter } from "next/router";
-// import Image from "next/image";
 
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 
@@ -344,7 +342,7 @@ export default function RegisterLoginForm() {
 
                   <div className="d-flex mb-3">
                     <Form.Check required aria-label="option 1" />
-                    <p className="privacy">
+                    <p className="privacy ms-2">
                       Accetto le condizioni della{" "}
                       <a style={{ color: "white" }} href="#">
                         Privacy.

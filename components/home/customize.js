@@ -4,7 +4,7 @@ export default function Customize() {
   return (
     <Container>
       <Row>
-        <Col>customize</Col>
+        <Col>TODO: custom pizza</Col>
       </Row>
     </Container>
   );

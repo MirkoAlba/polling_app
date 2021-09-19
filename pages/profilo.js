@@ -17,7 +17,7 @@ export default function Profilo({ userId }) {
   return <Profile userId={userId} />;
 }
 
-export async function getServerSideProps({ req, res }) {
+export async function getServerSideProps({ req }) {
   var token = req.cookies.jid;
 
   var data;
@@ -29,6 +29,7 @@ export async function getServerSideProps({ req, res }) {
             message
             verified
             userId
+            isAdmin
           }
         }
       `,
@@ -36,13 +37,22 @@ export async function getServerSideProps({ req, res }) {
     });
   }
 
-  var verificato = data?.data?.VerifyToken?.verified;
+  var verificato = data?.data?.VerifyToken;
 
-  if (!verificato) {
+  if (!verificato.verified) {
     return {
       redirect: {
         permanent: false,
         destination: "/register",
+      },
+    };
+  }
+
+  if (verificato.isAdmin) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/admin",
       },
     };
   }
