@@ -24,7 +24,7 @@ export default function ProfileSections({ selected, user }) {
   return (
     <div className="profile-sections mt-4">
       {selected === "info-0" ? (
-        <Col xs={12} className="profile-sections__info-1">
+        <Col sm={12} className="profile-sections__info-1">
           {error
             ? "Errore, ricarica la pagina."
             : loading

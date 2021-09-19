@@ -2,7 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/checkout": "pages/checkout.js",
-  "/profilo": "pages/profilo.js",
-  "/api/graphql": "pages/api/graphql.js"
+  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js",
+  "/api/graphql": "pages/api/graphql.js",
+  "/profilo": "pages/profilo.js"
 }
