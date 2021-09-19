@@ -84,16 +84,16 @@ $secondary: #070707;
 // // scss-docs-end theme-color-variables
 
 // // scss-docs-start theme-colors-map
-// $theme-colors: (
-//   "primary":    $primary,
-//   "secondary":  $secondary,
-//   "success":    $success,
-//   "info":       $info,
-//   "warning":    $warning,
-//   "danger":     $danger,
-//   "light":      $light,
-//   "dark":       $dark
-// ) !default;
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  //   "success":    $success,
+  //   "info":       $info,
+  //   "warning":    $warning,
+  //   "danger":     $danger,
+  //   "light":      $light,
+  "dark": $secondary,
+);
 // // scss-docs-end theme-colors-map
 
 // // scss-docs-start theme-colors-rgb
@@ -747,11 +747,11 @@ $secondary: #070707;
 // $input-btn-font-size:         $font-size-base !default;
 // $input-btn-line-height:       $line-height-base !default;
 
-// $input-btn-focus-width:         .25rem !default;
-// $input-btn-focus-color-opacity: .25 !default;
-// $input-btn-focus-color:         rgba($component-active-bg, $input-btn-focus-color-opacity) !default;
+$input-btn-focus-width: 0;
+$input-btn-focus-color-opacity: 0;
+$input-btn-focus-color: transparent;
 // $input-btn-focus-blur:          0 !default;
-// $input-btn-focus-box-shadow:    0 0 $input-btn-focus-blur $input-btn-focus-width $input-btn-focus-color !default;
+$input-btn-focus-box-shadow: none;
 
 // $input-btn-padding-y-sm:      .25rem !default;
 // $input-btn-padding-x-sm:      .5rem !default;
@@ -1270,9 +1270,9 @@ $secondary: #070707;
 // $accordion-padding-x:                     1.25rem !default;
 // $accordion-color:                         $body-color !default;
 // $accordion-bg:                            $body-bg !default;
-// $accordion-border-width:                  $border-width !default;
+$accordion-border-width: 0;
 // $accordion-border-color:                  rgba($black, .125) !default;
-// $accordion-border-radius:                 $border-radius !default;
+$accordion-border-radius: 0;
 // $accordion-inner-border-radius:           subtract($accordion-border-radius, $accordion-border-width) !default;
 
 // $accordion-body-padding-y:                $accordion-padding-y !default;
@@ -1290,8 +1290,8 @@ $secondary: #070707;
 // $accordion-button-focus-box-shadow:       $btn-focus-box-shadow !default;
 
 // $accordion-icon-width:                    1.25rem !default;
-// $accordion-icon-color:                    $accordion-button-color !default;
-// $accordion-icon-active-color:             $accordion-button-active-color !default;
+$accordion-icon-color: $white;
+$accordion-icon-active-color: $primary;
 // $accordion-icon-transition:               transform .2s ease-in-out !default;
 // $accordion-icon-transform:                rotate(-180deg) !default;
 

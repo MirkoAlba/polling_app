@@ -25,26 +25,58 @@ export default function ProfileSections({ selected, user }) {
     <div className="profile-sections mt-4">
       {selected === "info-0" ? (
         <Col xs={12} className="profile-sections__info-1">
-          {error ? (
-            "Errore, ricarica la pagina."
-          ) : loading ? (
-            "Caricamento..."
-          ) : (
-            <Accordion>
-              {orders
-                ? orders.map((order) => {
-                    return (
-                      <Accordion.Item key={order.id} eventKey={order.id}>
+          {error
+            ? "Errore, ricarica la pagina."
+            : loading
+            ? "Caricamento..."
+            : orders.length !== 0
+            ? orders.map((order) => {
+                return (
+                  <div className="mb-5">
+                    <Accordion key={order.id}>
+                      <Accordion.Item eventKey={order.id}>
                         <Accordion.Header>
-                          Ordine del {order.createdAt}
+                          {/* rimuovo stringhe dall'id per semplificarlo */}
+                          <p className="m-0">
+                            Ordine N° {order.id.replace(/\D/g, "")}
+                          </p>
                         </Accordion.Header>
-                        <Accordion.Body>ciao</Accordion.Body>
+                        <Accordion.Body className="text-white">
+                          <p>
+                            <span className="text-primary">Data: </span>
+                            {order.createdAt}
+                          </p>
+                          <p>
+                            <span className="text-primary">Stato: </span>
+                            {order.state}
+                          </p>
+                          <p>
+                            <span className="text-primary">
+                              Indirizzo consegna:{" "}
+                            </span>
+                            {order.delivery}
+                          </p>
+                          <ul className="mb-3">
+                            <span className="text-primary">Prodotti: </span>
+                            {order.orderItems.map((oi) => {
+                              return (
+                                <li key={oi.id}>
+                                  <span className="text-primary">
+                                    {oi.quantity}{" "}
+                                  </span>
+                                  {oi.product.productName}
+                                </li>
+                              );
+                            })}
+                          </ul>
+                          <p className="text-primary">Totale: {order.total}€</p>
+                        </Accordion.Body>
                       </Accordion.Item>
-                    );
-                  })
-                : "Ancora nessun ordine."}
-            </Accordion>
-          )}
+                    </Accordion>
+                  </div>
+                );
+              })
+            : "Ancora nessun ordine."}
         </Col>
       ) : selected === "info-1" ? (
         <Col xs={12} className="profile-sections__info-0">

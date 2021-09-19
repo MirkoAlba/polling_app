@@ -113,6 +113,7 @@ export const GET_ALL_CURRENT_USER_ORDERS = gql`
       }
 
       orderItems {
+        id
         quantity
         product {
           productName
