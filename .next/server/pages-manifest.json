@@ -2,13 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/profilo": "pages/profilo.js",
-  "/admin": "pages/admin.js",
-  "/api/graphql": "pages/api/graphql.js",
   "/register": "pages/register.js",
-  "/": "pages/index.js",
-  "/carrello": "pages/carrello.js",
-  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js",
-  "/checkout": "pages/checkout.js",
-  "/prodotti": "pages/prodotti.js"
+  "/admin": "pages/admin.js"
 }

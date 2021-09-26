@@ -153,11 +153,6 @@
 .content {
   margin-top: 120px;
   margin-bottom: 150px;
-
-  @include media-breakpoint-down(sm) {
-    margin-top: 80px;
-    margin-bottom: 0;
-  }
 }
 
 //Burger menu
@@ -170,12 +165,20 @@
   -ms-user-select: none;
   user-select: none;
 
+  &--admin {
+    width: 45px;
+  }
+
   .line {
     fill: none;
     transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
     stroke: $primary;
     stroke-width: 5.5;
     stroke-linecap: round;
+
+    &--admin {
+      stroke: $black;
+    }
 
     .bg-transition & {
       stroke: $secondary;

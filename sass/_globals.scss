@@ -3,6 +3,19 @@
   word-wrap: break-word;
 }
 
+*::selection {
+  background: $primary;
+  color: $white;
+}
+*::-moz-selection {
+  background: $primary;
+  color: $white;
+}
+*::-webkit-selection {
+  background: $primary;
+  color: $white;
+}
+
 body {
   color: $white;
   background-color: $black;

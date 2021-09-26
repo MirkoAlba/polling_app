@@ -35,23 +35,19 @@ function MyApp({ Component, pageProps, tokenResponse, token }) {
           <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
           <script src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.js"></script>
         </Head>
-        {isAdmin ? (
+        <Layout
+          viewportWidth={width}
+          viewportHeight={height}
+          userId={userId}
+          isAdmin={isAdmin}
+        >
           <Component
             {...pageProps}
             viewportWidth={width}
             viewportHeight={height}
             userId={userId}
           />
-        ) : (
-          <Layout viewportWidth={width} viewportHeight={height} userId={userId}>
-            <Component
-              {...pageProps}
-              viewportWidth={width}
-              viewportHeight={height}
-              userId={userId}
-            />
-          </Layout>
-        )}
+        </Layout>
       </AuthProvider>
     </StoreProvider>
   );
